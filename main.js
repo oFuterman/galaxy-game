@@ -122,3 +122,5 @@ function loadAndPlayVideo(link, planet){
 }
 
 getDataFromYoutube();
+
+//omers doing his random shit down here---------------------------------
