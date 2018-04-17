@@ -16,6 +16,7 @@ body {
 .header {
     display: inherit;
     position: relative;
+    text-align: center;
     height: 15%;
     width: 100%;
 }
@@ -137,5 +138,38 @@ body {
     border-radius: 50%;
     background-color: lightblue;
     bottom:53%;
+}
+
+.displayModal {
+    overflow: hidden;
+    display: block;
+    position: absolute;
+    height: 70%;
+    width: 50%;
+    background-color: rgba(157, 157, 157, 0.51);
+    z-index: 10;
+    bottom: 15%;
+    border-radius: 15%;
+    left: 25%;
+}
+
+.modalControls {
+    display: block;
+    position: relative;
+    height: 15%;
+    width: 100%;
+    top: 85%;
+}
+
+.buttons {
+    position: relative;
+    display: inline-block;
+    text-decoration: none;
+    height: 50%;
+    width: 25%;
+    left: 12%;
+    top: 25%;
+    border-radius: 50%;
+    cursor: pointer;
 }
 
