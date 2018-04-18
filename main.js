@@ -28,8 +28,9 @@ function initializeApp(){
     }
     // getDataFromYoutube();
     populatePictureArr();
-
-
+    $('.jupiterDiv').on('click',function(){
+        createCarousel(solarBodies['saturn'].nasaPicture);
+    });
 }
 
 function displayPlanetInfo(){
@@ -236,8 +237,9 @@ function infoButtonHandler(planet) {
     getWikiText(planet);
 }
 
-function imagesButtonHandler() {
-
+function imagesButtonHandler(planet) {
+    $('#contentDiv').empty();
+    createCarousel(planet);
 }
 
 function videoButtonHandler(planet) {
@@ -257,13 +259,13 @@ function loadAndPlayVideo(link, planet){
     $("#videoPlayer").attr('src','https://www.youtube.com/embed/' + link )
 }
 
-
 //omers doing his random things down here---------------------------------
 
-
+function getWikiText(planet) {
     if( planet ==='mercury')  {
         var link='Mercury_(planet)'
         var wikiAjaxObject = {
+
             
             // Mercury_(planet)
                 'dataType': 'json',
@@ -274,6 +276,7 @@ function loadAndPlayVideo(link, planet){
                 //     "sun":{ wikiLink: null, videos: [], nasaText: ''},
                 solarBodies[planet].wikiLink='https://en.wikipedia.org/wiki/'+planet
                 parseWikiText(data)
+
             
                 },
             
@@ -337,10 +340,6 @@ function parseWikiText(data) {
     
 }
 
-
-
-
-
 function populatePictureArr() {
     // const q = $('#query').val();
     for (let eachBody in solarBodies){
@@ -362,5 +361,36 @@ function populatePictureArr() {
             
         };
         $.ajax(NasaImagesObject)
+    }
+}
+
+function createCarousel(planetStr){
+    var images=solarBodies[planetStr].nasaPicture;
+    var carouselContainer=$('<div>',{
+        'class':'carouselContainer'
+    });
+    $('.contentDiv').append(carouselContainer);//inside this selector pick where the carousel should go
+    for(var i=0; i<images.length; i++){
+        console.log('i:',i);
+        var planetImageContainer= $('<div>');
+        $('.carouselContainer').append(planetImageContainer);
+        planetImageContainer.css({"background-image":'url('+images[i]+')','height':'300px','width':'300px'});
+        if(i===0){
+            planetImageContainer.addClass('currentImage');
+            planetImageContainer.addClass('hide');
+        }else{
+            planetImageContainer.addClass('hide');
+        }
+    }
+    $('.carouselContainer > div').on('click', rotate);
+}
+
+function rotate(){
+    $(this).removeClass('currentImage');
+    var nextImage = $(this).next();
+    if (nextImage.length !== 0) {
+        nextImage.addClass('currentImage');
+    } else {
+        $('.carouselContainer :first-child').addClass('currentImage');
     }
 }
