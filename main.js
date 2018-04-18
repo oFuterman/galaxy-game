@@ -1,13 +1,15 @@
 
 var solarBodies = {
-    "sun":{ wikiLink: null, videos: [], nasaText: ''},
-    "mercury":{ wikiLink: null, videos: [], nasaText: ''},
-    "venus":{ wikiLink: null, videos: [], nasaText: ''},
-    "earth":{ wikiLink: null, videos: [], nasaText: ''},
-    "mars":{ wikiLink: null, videos: [], nasaText: ''},
-    "uranus":{ wikiLink: null, videos: [], nasaText: ''},
-    "neptune":{ wikiLink: null, videos: [], nasaText: ''},
-    "pluto":{ wikiLink: null, videos: [], nasaText: ''}
+    "sun":{ wikiLink: null, videos: [], nasaPicture: ''},
+    "mercury":{ wikiLink: null, videos: [], nasaPicture: ''},
+    "venus":{ wikiLink: null, videos: [], nasaPicture: ''},
+    "earth":{ wikiLink: null, videos: [], nasaPicture: ''},
+    "mars":{ wikiLink: null, videos: [], nasaPicture: ''},
+    "uranus":{ wikiLink: null, videos: [], nasaPicture: ''},
+    "jupiter":{ wikiLink: null, videos: [], nasaPicture: ''},
+    "saturn":{ wikiLink: null, videos: [], nasaPicture: ''},
+    "neptune":{ wikiLink: null, videos: [], nasaPicture: ''},
+    "pluto":{ wikiLink: null, videos: [], nasaPicture: ''}
 };
 
 $(document).ready(initializeApp);
@@ -17,10 +19,10 @@ function initializeApp(){
     for(let planet in solarBodies){
         $(`.${planet}Div`).click( function(){
             renderPlanetInfoInModal(planet);
-        })
+        });
         $(".modalShadow").click(function(){
             $(this).hide();
-        })
+        });
         $(".modalBody").click(function(){
             event.stopPropagation();
         })
@@ -32,16 +34,14 @@ function displayPlanetInfo(){
 }
 
 function getDataFromYoutube() {
-    // var solarBodies = ["sun", "mercury", "venus", "earth", "mars", "jupiter", "saturn", "uranus", "neptune", "pluto"];
     for (let eachBody in solarBodies){
-    // for (solarIndex = 0; solarIndex < solarBodies.length; solarIndex++) {
         var youtubeAjaxObject = {
             'dataType': 'json',
             'url': 'http://s-apis.learningfuze.com/hackathon/youtube/search.php',
             'method': 'POST',
             'timeout': 3000,
             'data': {
-                'q': 'solar system ' + eachBody/*solarBodies[solarIndex]*/,
+                'q': 'solar system ' + eachBody,
                 'maxResults': 3,
                 'type': 'video',
                 'detailLevel': 'verbose'
@@ -49,7 +49,6 @@ function getDataFromYoutube() {
             'success': function (result) {
                 var currentSolarBodiesArr = Object.keys(result.data);
                 console.log(Object.keys(result.data));
-                // solarBodies
                 solarBodies[eachBody].videos = currentSolarBodiesArr;
             },
             'error': function (error) {
@@ -60,27 +59,11 @@ function getDataFromYoutube() {
     }
 }
 
-function renderVideoLinksOnDom(solarBodyVideoArray, planet) {
-    //for (var videoIndex = 0; videoIndex < solarBodyVideoArray.length; videoIndex++) {
-
-        // var frameTag = $("<iframe>", {
-        //     'class': planet + "Div",
-        //     'width': '560',
-        //     'height': '315',
-        //     'src': 'https://www.youtube.com/embed/' + solarBodyVideoArray[videoIndex],
-        //     'frameborder': '0',
-        //     'allow': 'autoplay; encrypted-media'
-        // });
-        // var contDiv = $("<div>", {
-        //     'id': solarBodyVideoArray[videoIndex] + "Div"
-        // });
-        // $("body").append(contDiv);
-        // console.log(solarBodyVideoArray[videoIndex] + "Div");
-        $("."+planet+ "Div").click(function(){
-            loadAndPlayVideo( solarBodyVideoArray[0], planet)
-        }).addClass('clickable')
-    //}
-}
+// function renderVideoLinksOnDom(solarBodyVideoArray, planet) {
+//         $("."+planet+ "Div").click(function(){
+//             loadAndPlayVideo( solarBodyVideoArray[0], planet)
+//         }).addClass('clickable')
+// }
 
 function renderPlanetInfoInModal(planet){
     $("#modalBody").empty();
@@ -96,22 +79,22 @@ function renderPlanetInfoInModal(planet){
         target:"_blank",
         href:planetInfo.wikiLink,
         text: planet + " wiki info"
-    })
+    });
     var videoList = $("<ul>").addClass('videoListContainer');
     var videoElements = [];
-    for(let i=0; i<planetInfo.videos.length; i++){
+    for(let videoCodeIterator=0; videoCodeIterator<planetInfo.videos.length; videoCodeIterator++){
         var videoLink = $("<li>", {
-            text: 'video '+i,
+            text: 'video '+videoCodeIterator,
             on: {
                 click: function(){
-                    loadAndPlayVideo(planetInfo.videos[i]);
+                    loadAndPlayVideo(planetInfo.videos[videoCodeIterator]);
                 }
             }
-        })
+        });
         videoElements.push( videoLink )
     }
     videoList.append(videoElements);
-    infoContainer.append(planetTitle, planetWikiLink, videoList)
+    infoContainer.append(planetTitle, planetWikiLink, videoList);
     $("#modalBody").append(infoContainer);
     $("#infoModal").show();
 }
