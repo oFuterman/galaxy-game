@@ -243,6 +243,11 @@ body {
 
 }
 
+.contentDiv {
+    height: 70%;
+    width: 100%;
+}
+
 .buttons:focus {
     outline: none;
 }
