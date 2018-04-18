@@ -124,3 +124,66 @@ function loadAndPlayVideo(link, planet){
 getDataFromYoutube();
 
 //omers doing his random shit down here---------------------------------
+
+
+
+
+function getDataFromYoutube() {
+    // var solarBodies = ["sun", "mercury", "venus", "earth", "mars", "jupiter", "saturn", "uranus", "neptune", "pluto"];
+    for (let eachBody in solarBodies){
+    // for (solarIndex = 0; solarIndex < solarBodies.length; solarIndex++) {
+        var youtubeAjaxObject = {
+            'dataType': 'json',
+            'url': 'http://s-apis.learningfuze.com/hackathon/youtube/search.php',
+            'method': 'POST',
+            'timeout': 3000,
+            'data': {
+                'q': 'solar system ' + eachBody/*solarBodies[solarIndex]*/,
+                'maxResults': 3,
+                'type': 'video',
+                'detailLevel': 'verbose'
+            },
+            'success': function (result) {
+                var currentSolarBodiesArr = Object.keys(result.data);
+                console.log(Object.keys(result.data));
+                // solarBodies
+                solarBodies[eachBody].videos = currentSolarBodiesArr;
+            },
+            'error': function (error) {
+                console.log(error)
+            }
+        };
+    $.ajax(youtubeAjaxObject);
+    }
+}
+
+ 
+function getWikiText() {
+    // var solarBodies = ["sun", "mercury", "venus", "earth", "mars", "jupiter", "saturn", "uranus", "neptune", "pluto"];
+    for (let eachBody in solarBodies){
+    // for (solarIndex = 0; solarIndex < solarBodies.length; solarIndex++) {
+        var wikiAjaxObject = {
+            'dataType': 'json',
+            'url': 'https://en.wikipedia.org/w/api.php?action=parse&format=json&prop=text&section=0&page='+eachBody+"&callback=?",
+            'success': function(data){
+            console.log(data) 
+            // var solarBodies = {
+            //     "sun":{ wikiLink: null, videos: [], nasaText: ''},
+            solarBodies[eachBody].wikiLink='https://en.wikipedia.org/wiki/'+eachBody
+            var markup = data.parse.text["*"];
+            var infoDiv = $('<div>').html(markup);         
+            infoDiv.find('a').each(function() { $(this).replaceWith($(this).html()); });
+            infoDiv.find('sup').remove();
+            infoDiv.find('.mw-ext-cite-error').remove();
+            var findthePs=($(infoDiv).find('.mw-parser-output>p'))
+            var display=$('a').html($(infoDiv).find(findthePs));
+            },
+        
+            'error': function (error) {
+                console.log(error)
+            }
+        };
+    $.ajax(wikiAjaxObject);
+    }
+}
+getWikiText()
