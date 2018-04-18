@@ -74,7 +74,7 @@ function renderPhotosOnModal () {
         "id" : "imageCarousel",
         "src": "images/editsun.jpg"
     });
-    $("#displayModal").append(photosToRender);
+    $("#contentDiv").append(photosToRender);
 
 
     console.log("button works")
