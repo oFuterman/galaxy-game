@@ -84,11 +84,11 @@ function renderPhotosOnModal () {
 
 }
 
-<!--<div id="videoModal" class="modalShadow">-->
-<!--<div id="videoModalBody" class="modalBody">-->
-<!--​<iframe id="videoPlayer" width="560" height="315" src="" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>-->
-<!--</div>-->
-<!--</div>-->
+{/*<div id="videoModal" class="modalShadow">*/}
+{/*<div id="videoModalBody" class="modalBody">*/}
+{/*<iframe id="videoPlayer" width="560" height="315" src="" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>*/}
+{/*</div>*/}
+{/*</div>*/}
 function renderVideosOnModal (currentSolarBodiesArr) {
     var vidModal = $("<div>", {
         "class" : "videoModal",
@@ -138,7 +138,7 @@ function loadAndPlayVideo(link, planet){
 
 
 function renderPlanetInfoInModal(planet){
-    console.log(planet)
+    console.log(planet);
     $("#displayModal").empty();
 
     var planetInfo = solarBodies[planet];
@@ -165,7 +165,7 @@ function renderPlanetInfoInModal(planet){
         "id" : "imageButton",
         text: "Images",
         "on": {
-            click: renderPhotosOnModal
+            click: imagesButtonHandler
         }
 
     });
@@ -174,7 +174,7 @@ function renderPlanetInfoInModal(planet){
         "id" : "infoButton",
         text: "Information",
         "on" : {
-            'click': getWikiText(planet)            
+            'click': infoButtonHandler
         },
     });
     var videosButton = $("<button>", {
@@ -182,7 +182,7 @@ function renderPlanetInfoInModal(planet){
         "id" : "videoButton",
 
         "on" : {
-            'click': getDataFromYoutube (planetInfo)
+            'click': videoButtonHandler
 
         },
         text: "Videos"
@@ -196,9 +196,6 @@ function renderPlanetInfoInModal(planet){
     var contentDiv = $("<div>", {
         "class": "contentDiv",
         "id": "contentDiv",
-        'on': {
-            'click': removeModal
-        }
     });
     var shadowDiv = $("<div>", {
         "class": "shadowDiv",
@@ -242,7 +239,17 @@ function renderPlanetInfoInModal(planet){
     $("#displayModal").show();
 }
 
+function infoButtonHandler() {
+    getWikiText(planet)
+}
 
+function imagesButtonHandler() {
+
+}
+
+function videoButtonHandler() {
+    getDataFromYoutube (planetInfo)
+}
 
 
 function removeModal() {
