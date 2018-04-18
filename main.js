@@ -116,7 +116,9 @@ function renderPlanetInfoInModal(planet){
     var videosButton = $("<button>", {
         "class": "videos buttons",
         "id" : "videoButton",
-        'click': getDataFromYoutube,
+        'on': {
+            'click': getDataFromYoutube
+        },
         text: "Videos"
     });
 
