@@ -1,5 +1,8 @@
+
+$(document).ready(initializeSolarApp);
+
 var solarBodies = {
- 
+
     "sun":{ wikiLink: null, videos: [], nasaPicture: [8,26,44]},
     "mercury":{ wikiLink: null, videos: [], nasaPicture: [16,21,66]},
     "venus":{ wikiLink: null, videos: [], nasaPicture: [21,28,16, 41]},
@@ -12,9 +15,8 @@ var solarBodies = {
     "pluto":{ wikiLink: null, videos: [], nasaPicture: [4,3,1,2]}
 };
 
-$(document).ready(initializeApp);
+function initializeSolarApp(){
 
-function initializeApp(){
         startModalClickHandler ();
     for(let planet in solarBodies){
         $(`.${planet}Div`).click( function(){
@@ -27,7 +29,6 @@ function initializeApp(){
             event.stopPropagation();
         })
     }
-    // getDataFromYoutube();
     populatePictureArr();
     $('.jupiterDiv').on('click',function(){
         createCarousel(solarBodies['saturn'].nasaPicture);
@@ -65,7 +66,7 @@ function getDataFromYoutube(planetInfo) {
                 var currentSolarBodiesArr = Object.keys(result.data);
                 console.log(Object.keys(result.data));
                 solarBodies.planetInfo = currentSolarBodiesArr;
-                renderVideosOnModal(currentSolarBodiesArr);
+                renderVideosOnModal(currentSolarBodiesArr, planetInfo);
             },
             'error': function (error) {
                 console.log(error)
@@ -89,7 +90,7 @@ function renderPhotosOnModal () {
     console.log("button works")
 }
 
-function renderVideosOnModal (currentSolarBodiesArr) {
+function renderVideosOnModal (currentSolarBodiesArr, planet) {
     var vidModal = $("<div>", {
         "class" : "videoModal",
         "id" : "videoModal",
@@ -101,15 +102,15 @@ function renderVideosOnModal (currentSolarBodiesArr) {
 
     });
     var iFrame = $("<iframe>", {
+        "class": 'videoPlayer',
         "id" : "videoPlayer",
         "width" : "560",
         "height" : "315",
         "src" : "",
         "frameborder" : "0",
         "allow" : "autoplay; encrypted-media",
-        // allowFullscreen
 
-    });
+    }).attr("allowFullscreen","allowFullscreen");
     $("#contentDiv").append(vidModal, vidModalBody, iFrame);
 
 
@@ -117,7 +118,8 @@ function renderVideosOnModal (currentSolarBodiesArr) {
     var videoElements = [];
     for(let videoCodeIterator=0; videoCodeIterator<currentSolarBodiesArr.length; videoCodeIterator++){
         var videoLink = $("<li>", {
-            text: 'video '+videoCodeIterator,
+            text: planet +' video '+(videoCodeIterator+1),
+            'class': 'videoList',
             on: {
                 click: function(){
                     loadAndPlayVideo(currentSolarBodiesArr[videoCodeIterator]);
@@ -130,6 +132,7 @@ function renderVideosOnModal (currentSolarBodiesArr) {
 
     $("#contentDiv").append(videoList);
 }
+
 function loadAndPlayVideo(link, planet){
     $("#videoModal").show();
     $("#videoPlayer").attr('src','https://www.youtube.com/embed/' + link )
@@ -257,6 +260,7 @@ function imagesButtonHandler(planet) {
 function videoButtonHandler(planet) {
     $('#contentDiv').empty();
     getDataFromYoutube (planet);
+    // videoCarousel();
 }
 
 
@@ -308,7 +312,7 @@ function getWikiText(planet) {
                 // console.log(data);
                 // var solarBodies = {
                 //     "sun":{ wikiLink: null, videos: [], nasaText: ''},
-                solarBodies[planet].wikiLink='https://en.wikipedia.org/wiki/'+planet
+                solarBodies[planet].wikiLink='https://en.wikipedia.org/wiki/'+planet;
                 parseWikiText(data)
             
                 },
@@ -406,3 +410,56 @@ function rotate(){
         $('.carouselContainer :first-child').addClass('currentImage');
     }
 }
+
+// video carousel
+// function videoCarousel() {
+//     console.log("video carousel function entered");
+//     let containerDiv = $("<div>", {
+//         'class': 'container'
+//     });
+//     let carouselDiv = $("<div>", {
+//         'class': 'carousel'
+//     });
+//     let video1 = $("<div>", {
+//         'class': 'item a'
+//     });
+//     let video2 = $("<div>", {
+//         'class': 'item b'
+//     });
+//     let video3 = $("<div>", {
+//         'class': 'item c'
+//     });
+//     let nextButton = $("<div>", {
+//         'class': 'next',
+//         'text': 'next'
+//     });
+//     let prevButton = $("<div>", {
+//         'class': 'prev',
+//         'text': 'prev'
+//     });
+//     let carousel = $(".carousel"),
+//         currdeg  = 0;
+//
+//     containerDiv.append(carouselDiv);
+//     carouselDiv.append(video1, video2, video3);
+//     containerDiv.append(nextButton, prevButton);
+//     $("body").append(containerDiv);
+//
+//     $(".next").on("click", { d: "n" }, rotate);
+//     $(".prev").on("click", { d: "p" }, rotate);
+//
+//     function rotate(e){
+//         if(e.data.d==="n"){
+//             currdeg = currdeg - 60;
+//         }
+//         if(e.data.d==="p"){
+//             currdeg = currdeg + 60;
+//         }
+//         carousel.css({
+//             "-webkit-transform": "rotateY("+currdeg+"deg)",
+//             "-moz-transform": "rotateY("+currdeg+"deg)",
+//             "-o-transform": "rotateY("+currdeg+"deg)",
+//             "transform": "rotateY("+currdeg+"deg)"
+//         });
+//     }
+// }
