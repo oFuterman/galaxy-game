@@ -258,30 +258,54 @@ function loadAndPlayVideo(link, planet){
 }
 
 
-//omers doing his random shit down here---------------------------------
+//omers doing his random things down here---------------------------------
 
 
-
-
-
- 
-function getWikiText(planet) {
+    if( planet ==='mercury')  {
+        var link='Mercury_(planet)'
         var wikiAjaxObject = {
-            'dataType': 'json',
-            'url': 'https://en.wikipedia.org/w/api.php?action=parse&format=json&prop=text&section=0&page='+planet+"&callback=?",
-            'success': function(data){
-            solarBodies[planet].wikiLink='https://en.wikipedia.org/wiki/'+planet;
-            parseWikiText(data)
-        
-            },
-        
-            'error': function (error) {
-                console.log(error)
-            }
-        };
-    $.ajax(wikiAjaxObject);
-    
-}
+            
+            // Mercury_(planet)
+                'dataType': 'json',
+                'url': 'https://en.wikipedia.org/w/api.php?action=parse&format=json&prop=text&section=0&page='+link+"&callback=?",
+                'success': function(data){
+                // console.log(data);
+                // var solarBodies = {
+                //     "sun":{ wikiLink: null, videos: [], nasaText: ''},
+                solarBodies[planet].wikiLink='https://en.wikipedia.org/wiki/'+planet
+                parseWikiText(data)
+            
+                },
+            
+                'error': function (error) {
+                    console.log(error)
+                }
+            };
+        $.ajax(wikiAjaxObject);
+    } else {
+        console.log(planet)
+        var wikiAjaxObject = {
+            
+            // Mercury_(planet)
+                'dataType': 'json',
+                'url': 'https://en.wikipedia.org/w/api.php?action=parse&format=json&prop=text&section=0&page='+planet+"&callback=?",
+                'success': function(data){
+                // console.log(data);
+                // var solarBodies = {
+                //     "sun":{ wikiLink: null, videos: [], nasaText: ''},
+                solarBodies[planet].wikiLink='https://en.wikipedia.org/wiki/'+planet
+                parseWikiText(data)
+            
+                },
+            
+                'error': function (error) {
+                    console.log(error)
+                }
+            };
+        $.ajax(wikiAjaxObject);
+        }
+    }
+
 getWikiText();
 
 function parseWikiText(data) {
