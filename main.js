@@ -15,6 +15,7 @@ var solarBodies = {
 $(document).ready(initializeApp);
 
 function initializeApp(){
+        startModalClickHandler ();
     for(let planet in solarBodies){
         $(`.${planet}Div`).click( function(){
             renderPlanetInfoInModal(planet);
@@ -33,6 +34,17 @@ function initializeApp(){
     });
 }
 
+function startModalClickHandler () {
+    console.log("click");
+    $("#bodyId").click(hideStartModal)
+
+
+}
+
+function hideStartModal () {
+    console.log("hideModal");
+    $("#startModal").hide();
+}
 function displayPlanetInfo(){
 
 }
@@ -148,7 +160,7 @@ function renderPlanetInfoInModal(planet){
     var planetTitle = $("<div>",{
         'class': 'modalTitle',
         "id":"modalTitle",
-        text: planet,
+        text: planet.toUpperCase(),
         'on': {
             'click': removeModal
         }
@@ -274,7 +286,7 @@ function getWikiText(planet) {
     // var solarBodies = ["sun", "mercury", "venus", "earth", "mars", "jupiter", "saturn", "uranus", "neptune", "pluto"];
     // for (solarIndex = 0; solarIndex < solarBodies.length; solarIndex++) {
     if( planet ==='mercury')  {
-        var link='Mercury_(planet)'
+        var link='Mercury_(planet)';
         var wikiAjaxObject = {
 
             
@@ -297,7 +309,7 @@ function getWikiText(planet) {
             };
         $.ajax(wikiAjaxObject);
     } else {
-        console.log(planet)
+        console.log(planet);
         var wikiAjaxObject = {
             
             // Mercury_(planet)
@@ -383,10 +395,10 @@ function createCarousel(planetStr){
     });
     $('.contentDiv').append(carouselContainer);//inside this selector pick where the carousel should go
     for(var i=0; i<images.length; i++){
-        console.log('i:',i);
-        var planetImageContainer= $('<div>');
+        var planetImageContainer= $('<div>',{
+            "class" : "carouselImages"});
         $('.carouselContainer').append(planetImageContainer);
-        planetImageContainer.css({"background-image":'url('+images[i]+')','height':'300px','width':'300px'});
+        planetImageContainer.css({"background-image":'url('+images[i]+')'});
         if(i===0){
             planetImageContainer.addClass('currentImage');
             planetImageContainer.addClass('hide');
