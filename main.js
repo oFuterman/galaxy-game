@@ -69,6 +69,18 @@ function getDataFromYoutube() {
 //         }).addClass('clickable')
 // }
 
+function renderPhotosOnModal () {
+    var photosToRender = $("<img>", {
+        "id" : "imageCarousel",
+        "src": "images/editsun.jpg"
+    });
+    $("#displayModal").append(photosToRender);
+
+
+    console.log("button works")
+
+}
+
 function renderPlanetInfoInModal(planet){
     $("#displayModal").empty();
 
@@ -89,7 +101,11 @@ function renderPlanetInfoInModal(planet){
     var imagesButton = $("<button>", {
         "class": "images buttons",
         "id" : "imageButton",
-        text: "Images"
+        text: "Images",
+        "on": {
+            click: renderPhotosOnModal
+        }
+
     });
     var informationButton = $("<button>", {
         "class": "information buttons",
