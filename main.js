@@ -36,8 +36,9 @@ function displayPlanetInfo(){
 
 }
 
-function getDataFromYoutube() {
+function getDataFromYoutube(planetInfo) {
     console.log('get data running');
+    console.log(planetInfo);
     for (let eachBody in solarBodies){
         var youtubeAjaxObject = {
             'dataType': 'json',
@@ -55,6 +56,7 @@ function getDataFromYoutube() {
                 console.log(Object.keys(result.data));
                 solarBodies[eachBody].videos = currentSolarBodiesArr;
                 //function to display videos in the modal
+                renderVideosOnModal(currentSolarBodiesArr);
             },
             'error': function (error) {
                 console.log(error)
@@ -82,10 +84,64 @@ function renderPhotosOnModal () {
 
 }
 
+<!--<div id="videoModal" class="modalShadow">-->
+<!--<div id="videoModalBody" class="modalBody">-->
+<!--​<iframe id="videoPlayer" width="560" height="315" src="" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>-->
+<!--</div>-->
+<!--</div>-->
+function renderVideosOnModal (currentSolarBodiesArr) {
+    var vidModal = $("<div>", {
+        "class" : "videoModal",
+        "id" : "videoModal",
+
+    });
+    var vidModalBody = $("<div>", {
+        "class" : "videoModalBody",
+        "id" : "videoModalBody",
+
+    });
+    var iFrame = $("<iframe>", {
+        "id" : "videoPlayer",
+        "width" : "560",
+        "height" : "315",
+        "src" : "",
+        "frameborder" : "0",
+        "allow" : "autoplay; encrypted-media",
+        // allowFullscreen
+
+    });
+    $("#contentDiv").append(vidModal, vidModalBody, iFrame);
+
+
+    var videoList = $("<ul>").addClass('videoListContainer');
+    var videoElements = [];
+    for(let videoCodeIterator=0; videoCodeIterator<currentSolarBodiesArr.length; videoCodeIterator++){
+        var videoLink = $("<li>", {
+            text: 'video '+videoCodeIterator,
+            on: {
+                click: function(){
+                    loadAndPlayVideo(currentSolarBodiesArr[videoCodeIterator]);
+                }
+            }
+        });
+        videoElements.push( videoLink )
+    }
+    videoList.append(videoElements);
+
+    $("#contentDiv").append(videoList);
+}
+function loadAndPlayVideo(link, planet){
+    $("#videoModal").show();
+    $("#videoPlayer").attr('src','https://www.youtube.com/embed/' + link )
+}
+
+
+
 function renderPlanetInfoInModal(planet){
     $("#displayModal").empty();
 
     var planetInfo = solarBodies[planet];
+
     var infoContainer = $("<div>",{
         'class': 'displayModal',
         "id": "displayModal"
@@ -116,7 +172,9 @@ function renderPlanetInfoInModal(planet){
     var videosButton = $("<button>", {
         "class": "videos buttons",
         "id" : "videoButton",
-        'click': getDataFromYoutube,
+        "on" : {
+            'click': getDataFromYoutube (planetInfo)
+        },
         text: "Videos"
     });
 
@@ -129,30 +187,14 @@ function renderPlanetInfoInModal(planet){
         "class": "contentDiv",
         "id": "contentDiv"
     });
-    var videoList = $("<ul>").addClass('videoListContainer');
-    var videoElements = [];
-    for(let videoCodeIterator=0; videoCodeIterator<planetInfo.videos.length; videoCodeIterator++){
-        var videoLink = $("<li>", {
-            text: 'video '+videoCodeIterator,
-            on: {
-                click: function(){
-                    loadAndPlayVideo(planetInfo.videos[videoCodeIterator]);
-                }
-            }
-        });
-        videoElements.push( videoLink )
-    }
-    videoList.append(videoElements);
+
     modalControls.append(imagesButton, informationButton, videosButton);
     infoContainer.append(planetTitle,contentDiv, modalControls);
     $("#bodyId").append(infoContainer);
     $("#displayModal").show();
 }
 
-function loadAndPlayVideo(link, planet){
-    $("#videoModal").show();
-    $("#videoPlayer").attr('src','https://www.youtube.com/embed/' + link )
-}
+
 
 
 //omers doing his random shit down here---------------------------------
