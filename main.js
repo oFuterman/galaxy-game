@@ -1,5 +1,5 @@
 var solarBodies = {
- 
+
     "sun":{ wikiLink: null, videos: [], nasaPicture: [8,26,44]},
     "mercury":{ wikiLink: null, videos: [], nasaPicture: [16,21,66]},
     "venus":{ wikiLink: null, videos: [], nasaPicture: [21,28,16, 41]},
@@ -38,27 +38,28 @@ function displayPlanetInfo(){
 }
 
 function getDataFromYoutube(planetInfo) {
-        var youtubeAjaxObject = {
-            'dataType': 'json',
-            'url': 'http://s-apis.learningfuze.com/hackathon/youtube/search.php',
-            'method': 'POST',
-            'timeout': 3000,
-            'data': {
-                'q': 'solar system ' + planetInfo,
-                'maxResults': 3,
-                'type': 'video',
-                'detailLevel': 'verbose'
-            },
-            'success': function (result) {
-                var currentSolarBodiesArr = Object.keys(result.data);
-                console.log(Object.keys(result.data));
-                solarBodies.planetInfo = currentSolarBodiesArr;
-                renderVideosOnModal(currentSolarBodiesArr);
-            },
-            'error': function (error) {
-                console.log(error)
-            }
-        };
+    var youtubeAjaxObject = {
+        'dataType': 'json',
+        'url': 'http://s-apis.learningfuze.com/hackathon/youtube/search.php',
+        'method': 'POST',
+        'timeout': 3000,
+        'data': {
+            'q': 'solar system ' + planetInfo,
+            'maxResults': 3,
+            'type': 'video',
+            'detailLevel': 'verbose'
+        },
+        'success': function (result) {
+            removeLoader();
+            var currentSolarBodiesArr = Object.keys(result.data);
+            console.log(Object.keys(result.data));
+            solarBodies.planetInfo = currentSolarBodiesArr;
+            renderVideosOnModal(currentSolarBodiesArr);
+        },
+        'error': function (error) {
+            console.log(error)
+        }
+    };
     $.ajax(youtubeAjaxObject);
 }
 
@@ -203,11 +204,11 @@ function renderPlanetInfoInModal(planet){
     var videoList = $("<ul>").addClass('videoListContainer');
     var videoElements = [];
     var closeButton = $("<button>", {
-       'id': 'closeButton',
-       'class': 'closeButton',
+        'id': 'closeButton',
+        'class': 'closeButton',
         'text': 'x',
         'on': {
-           'click': removeModal
+            'click': removeModal
         }
 
     });
@@ -234,16 +235,19 @@ function renderPlanetInfoInModal(planet){
 
 function infoButtonHandler(planet) {
     $('#contentDiv').empty();
+    addLoader();
     getWikiText(planet);
 }
 
 function imagesButtonHandler(planet) {
     $('#contentDiv').empty();
+    addLoader();
     createCarousel(planet);
 }
 
 function videoButtonHandler(planet) {
     $('#contentDiv').empty();
+    addLoader();
     getDataFromYoutube (planet);
 }
 
@@ -266,78 +270,78 @@ function getWikiText(planet) {
         var link='Mercury_(planet)'
         var wikiAjaxObject = {
 
-            
+
             // Mercury_(planet)
-                'dataType': 'json',
-                'url': 'https://en.wikipedia.org/w/api.php?action=parse&format=json&prop=text&section=0&page='+link+"&callback=?",
-                'success': function(data){
+            'dataType': 'json',
+            'url': 'https://en.wikipedia.org/w/api.php?action=parse&format=json&prop=text&section=0&page='+link+"&callback=?",
+            'success': function(data){
                 // console.log(data);
                 // var solarBodies = {
                 //     "sun":{ wikiLink: null, videos: [], nasaText: ''},
                 solarBodies[planet].wikiLink='https://en.wikipedia.org/wiki/'+planet
+                removeLoader();
                 parseWikiText(data)
+            },
 
-            
-                },
-            
-                'error': function (error) {
-                    console.log(error)
-                }
-            };
+            'error': function (error) {
+                console.log(error)
+            }
+        };
         $.ajax(wikiAjaxObject);
     } else {
         console.log(planet)
         var wikiAjaxObject = {
-            
+
             // Mercury_(planet)
-                'dataType': 'json',
-                'url': 'https://en.wikipedia.org/w/api.php?action=parse&format=json&prop=text&section=0&page='+planet+"&callback=?",
-                'success': function(data){
+            'dataType': 'json',
+            'url': 'https://en.wikipedia.org/w/api.php?action=parse&format=json&prop=text&section=0&page='+planet+"&callback=?",
+            'success': function(data){
                 // console.log(data);
                 // var solarBodies = {
                 //     "sun":{ wikiLink: null, videos: [], nasaText: ''},
                 solarBodies[planet].wikiLink='https://en.wikipedia.org/wiki/'+planet
+                removeLoader()
                 parseWikiText(data)
-            
-                },
-            
-                'error': function (error) {
-                    console.log(error)
-                }
-            };
+            },
+
+            'error': function (error) {
+                console.log(error)
+            }
+        };
         $.ajax(wikiAjaxObject);
-        }
     }
+}
 
 getWikiText();
 
 function parseWikiText(data) {
     var markup = data.parse.text["*"];
-               //the ajax call starts with the outer most object which is DATA (that is what is passed in as an argument,
-               //then the next one is PARSE which is also an object and thats why we need TEXT at object *
-        var infoDiv = $('<div></div>').html(markup);
-        //creating elment of div with the text of markup
-        
-        infoDiv.find('a').each(function() { $(this).replaceWith($(this).html()); });
-        // remove links as they will not work
+    //the ajax call starts with the outer most object which is DATA (that is what is passed in as an argument,
+    //then the next one is PARSE which is also an object and thats why we need TEXT at object *
+    var infoDiv = $('<div></div>').html(markup);
+    //creating elment of div with the text of markup
 
-        infoDiv.find('sup').remove();
-     		// remove any references
+    infoDiv.find('a').each(function() { $(this).replaceWith($(this).html()); });
+    // remove links as they will not work
 
-        infoDiv.find('.mw-ext-cite-error').remove();
-    	 // remove cite error
-        var paragraphContentArr=($(infoDiv).find('.mw-parser-output>p'));
-        var textofParagraphContent='';
-        var pContentWithTags=textofParagraphContent;
-        for(var k=0;k<paragraphContentArr.length;k++){
-            pContentWithTags+=("<p>"+paragraphContentArr[k].innerHTML+'</p>')
-            
-        }
-        // console.log(pContentWithTags)
-        $('#contentDiv').append(pContentWithTags);
-        console.log(pContentWithTags)
+    infoDiv.find('sup').remove();
+    // remove any references
 
-    
+    infoDiv.find('.mw-ext-cite-error').remove();
+    // remove cite error
+    var paragraphContentArr=($(infoDiv).find('.mw-parser-output>p'));
+    var textofParagraphContent='';
+    var pContentWithTags=textofParagraphContent;
+    for(var k=0;k<paragraphContentArr.length;k++){
+        pContentWithTags+=("<p>"+paragraphContentArr[k].innerHTML+'</p>')
+
+    }
+    // console.log(pContentWithTags)
+    removeLoader();
+    $('#contentDiv').append(pContentWithTags);
+    console.log(pContentWithTags)
+
+
 }
 
 function populatePictureArr() {
@@ -353,18 +357,19 @@ function populatePictureArr() {
                     var divToAppend = $("<div>");
                     var imagePath=resp.collection.items[solarBodies[eachBody].nasaPicture[i]].links[0].href;
                     solarBodies[eachBody].nasaPicture[i]=imagePath
-                    
+
 
                 }
 
             }
-            
+
         };
         $.ajax(NasaImagesObject)
     }
 }
 
 function createCarousel(planetStr){
+    removeLoader();
     var images=solarBodies[planetStr].nasaPicture;
     var carouselContainer=$('<div>',{
         'class':'carouselContainer'
@@ -393,4 +398,15 @@ function rotate(){
     } else {
         $('.carouselContainer :first-child').addClass('currentImage');
     }
+}
+
+function addLoader(){
+    var loaderDiv=$('<div>',{
+        'class':'loader'
+    });
+    $('.contentDiv').append(loaderDiv);
+}
+
+function removeLoader(){
+    $('.contentDiv').empty();
 }
