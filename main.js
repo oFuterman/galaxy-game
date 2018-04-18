@@ -116,7 +116,6 @@ function renderVideosOnModal (currentSolarBodiesArr, planet) {
     }).attr("allowFullscreen","allowFullscreen");
     $("#contentDiv").append(vidModal, vidModalBody, iFrame);
 
-
     var videoList = $("<ul>").addClass('videoListContainer');
     var videoElements = [];
     for(let videoCodeIterator=0; videoCodeIterator<currentSolarBodiesArr.length; videoCodeIterator++){
@@ -131,8 +130,9 @@ function renderVideosOnModal (currentSolarBodiesArr, planet) {
         });
         videoElements.push( videoLink )
     }
-    videoList.append(videoElements);
 
+    loadAndPlayVideo(currentSolarBodiesArr[0]);
+    videoList.append(videoElements);
     $("#contentDiv").append(videoList);
 }
 
@@ -266,6 +266,8 @@ function videoButtonHandler(planet) {
     $('#contentDiv').empty();
     addLoader();
     getDataFromYoutube (planet);
+    loadAndPlayVideo(solarBodies[planet].videos[0]);
+    console.log(solarBodies[planet].videos[0])
     // videoCarousel();
 }
 
@@ -276,7 +278,7 @@ function removeModal() {
 }
 
 
-function loadAndPlayVideo(link, planet){
+function loadAndPlayVideo(link){
     $("#videoModal").show();
     $("#videoPlayer").attr('src','https://www.youtube.com/embed/' + link )
 }
