@@ -138,6 +138,7 @@ function loadAndPlayVideo(link, planet){
 
 
 function renderPlanetInfoInModal(planet){
+    console.log(planet)
     $("#displayModal").empty();
 
     var planetInfo = solarBodies[planet];
@@ -157,9 +158,7 @@ function renderPlanetInfoInModal(planet){
     var modalControls = $("<div>", {
         "class": "modalControls",
         "id": "modalControls",
-        'on': {
-            'click': removeModal
-        }
+
     });
     var imagesButton = $("<button>", {
         "class": "images buttons",
@@ -173,7 +172,10 @@ function renderPlanetInfoInModal(planet){
     var informationButton = $("<button>", {
         "class": "information buttons",
         "id" : "infoButton",
-        text: "Information"
+        text: "Information",
+        "on" : {
+            'click': getWikiText(planet)            
+        },
     });
     var videosButton = $("<button>", {
         "class": "videos buttons",
@@ -262,18 +264,17 @@ function loadAndPlayVideo(link, planet){
 
 
  
-function getWikiText() {
+function getWikiText(planet) {
     // var solarBodies = ["sun", "mercury", "venus", "earth", "mars", "jupiter", "saturn", "uranus", "neptune", "pluto"];
-    for (let eachBody in solarBodies){
     // for (solarIndex = 0; solarIndex < solarBodies.length; solarIndex++) {
         var wikiAjaxObject = {
             'dataType': 'json',
-            'url': 'https://en.wikipedia.org/w/api.php?action=parse&format=json&prop=text&section=0&page='+eachBody+"&callback=?",
+            'url': 'https://en.wikipedia.org/w/api.php?action=parse&format=json&prop=text&section=0&page='+planet+"&callback=?",
             'success': function(data){
             // console.log(data);
             // var solarBodies = {
             //     "sun":{ wikiLink: null, videos: [], nasaText: ''},
-            solarBodies[eachBody].wikiLink='https://en.wikipedia.org/wiki/'+eachBody
+            solarBodies[planet].wikiLink='https://en.wikipedia.org/wiki/'+planet
             parseWikiText(data)
         
             },
@@ -283,7 +284,7 @@ function getWikiText() {
             }
         };
     $.ajax(wikiAjaxObject);
-    }
+    
 }
 getWikiText();
 
@@ -311,7 +312,8 @@ function parseWikiText(data) {
             
         }
         // console.log(pContentWithTags)
-        $('#bodyId').append(pContentWithTags)
+        $('#contentDiv').append(pContentWithTags)
+        console.log(pContentWithTags)
 
     
 }
