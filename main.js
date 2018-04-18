@@ -26,7 +26,7 @@ function initializeApp(){
             event.stopPropagation();
         })
     }
-    getDataFromYoutube();
+    // getDataFromYoutube();
     populatePictureArr();
 
 
@@ -93,11 +93,17 @@ function renderPlanetInfoInModal(planet){
     var planetTitle = $("<div>",{
         'class': 'modalTitle',
         "id":"modalTitle",
-        text: planet
+        text: planet,
+        'on': {
+            'click': removeModal
+        }
     });
     var modalControls = $("<div>", {
         "class": "modalControls",
-        "id": "modalControls"
+        "id": "modalControls",
+        'on': {
+            'click': removeModal
+        }
     });
     var imagesButton = $("<button>", {
         "class": "images buttons",
@@ -129,10 +135,29 @@ function renderPlanetInfoInModal(planet){
     });
     var contentDiv = $("<div>", {
         "class": "contentDiv",
-        "id": "contentDiv"
+        "id": "contentDiv",
+        'on': {
+            'click': removeModal
+        }
+    });
+    var shadowDiv = $("<div>", {
+        "class": "shadowDiv",
+        "id": "shadowDiv",
+        'on': {
+            'click': removeModal
+        }
     });
     var videoList = $("<ul>").addClass('videoListContainer');
     var videoElements = [];
+    var closeButton = $("<button>", {
+       'id': 'closeButton',
+       'class': 'closeButton',
+        'text': 'x',
+        'on': {
+           'click': removeModal
+        }
+
+    });
     for(let videoCodeIterator=0; videoCodeIterator<planetInfo.videos.length; videoCodeIterator++){
         var videoLink = $("<li>", {
             text: 'video '+videoCodeIterator,
@@ -145,11 +170,19 @@ function renderPlanetInfoInModal(planet){
         videoElements.push( videoLink )
     }
     videoList.append(videoElements);
+    planetTitle.append(closeButton);
     modalControls.append(imagesButton, informationButton, videosButton);
     infoContainer.append(planetTitle,contentDiv, modalControls);
-    $("#bodyId").append(infoContainer);
+
+    $("#bodyId").append(infoContainer, shadowDiv);
     $("#displayModal").show();
 }
+
+function removeModal() {
+    $('#displayModal').remove();
+    this.remove()
+}
+
 
 function loadAndPlayVideo(link, planet){
     $("#videoModal").show();
@@ -212,7 +245,7 @@ function parseWikiText(data) {
             pContentWithTags+=("<p>"+paragraphContentArr[k].innerHTML+'</p>')
             
         }
-        console.log(pContentWithTags)
+        // console.log(pContentWithTags)
         $('#bodyId').append(pContentWithTags)
 
     
@@ -229,7 +262,7 @@ function populatePictureArr() {
             url: 'https://images-api.nasa.gov/search?q='+eachBody,
             method: 'GET',
             success: resp => {
-                console.log('RESP:', resp);
+                // console.log('RESP:', resp);
                 // for (let eachBody in solarBodies){
                 for(let i=0;i<solarBodies[eachBody].nasaPicture.length;i++){
                     var divToAppend = $("<div>")
