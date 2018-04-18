@@ -1,15 +1,15 @@
-
 var solarBodies = {
-    "sun":{ wikiLink: null, videos: [], nasaPicture: ''},
-    "mercury":{ wikiLink: null, videos: [], nasaPicture: ''},
-    "venus":{ wikiLink: null, videos: [], nasaPicture: ''},
-    "earth":{ wikiLink: null, videos: [], nasaPicture: ''},
-    "mars":{ wikiLink: null, videos: [], nasaPicture: ''},
-    "uranus":{ wikiLink: null, videos: [], nasaPicture: ''},
-    "jupiter":{ wikiLink: null, videos: [], nasaPicture: ''},
-    "saturn":{ wikiLink: null, videos: [], nasaPicture: ''},
-    "neptune":{ wikiLink: null, videos: [], nasaPicture: ''},
-    "pluto":{ wikiLink: null, videos: [], nasaPicture: ''}
+ 
+    "sun":{ wikiLink: null, videos: [], nasaPicture: [8,26,44]},
+    "mercury":{ wikiLink: null, videos: [], nasaPicture: [16,21,66]},
+    "venus":{ wikiLink: null, videos: [], nasaPicture: [21,28,16, 41]},
+    "earth":{ wikiLink: null, videos: [], nasaPicture: [56,72,89]},
+    "mars":{ wikiLink: null, videos: [], nasaPicture: [2,16,18,36,47]},
+    "uranus":{ wikiLink: null, videos: [], nasaPicture: [3,26,45,47]},
+    "jupiter":{ wikiLink: null, videos: [], nasaPicture: [35,97,52]},
+    "saturn":{ wikiLink: null, videos: [], nasaPicture: [46,26,39,50,95]},
+    "neptune":{ wikiLink: null, videos: [], nasaPicture: [80,19,14]},
+    "pluto":{ wikiLink: null, videos: [], nasaPicture: [4,3,1,2]}
 };
 
 $(document).ready(initializeApp);
@@ -27,6 +27,9 @@ function initializeApp(){
             event.stopPropagation();
         })
     }
+    getDataFromYoutube();
+    getNasaData();
+
 }
 
 function displayPlanetInfo(){
@@ -104,41 +107,12 @@ function loadAndPlayVideo(link, planet){
     $("#videoPlayer").attr('src','https://www.youtube.com/embed/' + link )
 }
 
-getDataFromYoutube();
 
 //omers doing his random shit down here---------------------------------
 
 
 
 
-function getDataFromYoutube() {
-    // var solarBodies = ["sun", "mercury", "venus", "earth", "mars", "jupiter", "saturn", "uranus", "neptune", "pluto"];
-    for (let eachBody in solarBodies){
-    // for (solarIndex = 0; solarIndex < solarBodies.length; solarIndex++) {
-        var youtubeAjaxObject = {
-            'dataType': 'json',
-            'url': 'http://s-apis.learningfuze.com/hackathon/youtube/search.php',
-            'method': 'POST',
-            'timeout': 3000,
-            'data': {
-                'q': 'solar system ' + eachBody/*solarBodies[solarIndex]*/,
-                'maxResults': 3,
-                'type': 'video',
-                'detailLevel': 'verbose'
-            },
-            'success': function (result) {
-                var currentSolarBodiesArr = Object.keys(result.data);
-                console.log(Object.keys(result.data));
-                // solarBodies
-                solarBodies[eachBody].videos = currentSolarBodiesArr;
-            },
-            'error': function (error) {
-                console.log(error)
-            }
-        };
-    $.ajax(youtubeAjaxObject);
-    }
-}
 
  
 function getWikiText() {
@@ -153,13 +127,8 @@ function getWikiText() {
             // var solarBodies = {
             //     "sun":{ wikiLink: null, videos: [], nasaText: ''},
             solarBodies[eachBody].wikiLink='https://en.wikipedia.org/wiki/'+eachBody
-            var markup = data.parse.text["*"];
-            var infoDiv = $('<div>').html(markup);         
-            infoDiv.find('a').each(function() { $(this).replaceWith($(this).html()); });
-            infoDiv.find('sup').remove();
-            infoDiv.find('.mw-ext-cite-error').remove();
-            var findthePs=($(infoDiv).find('.mw-parser-output>p'))
-            var display=$('a').html($(infoDiv).find(findthePs));
+            parseWikiText(data)
+        
             },
         
             'error': function (error) {
@@ -170,3 +139,59 @@ function getWikiText() {
     }
 }
 getWikiText()
+
+function parseWikiText(data) {
+    var markup = data.parse.text["*"];
+               //the * is a bad variable name, as an object it can be named ANYTHING. 
+               //the ajax call starts with the outer most object which is DATA (that is what is passed in as an arguement,
+               //then the next one is PARSE which is also an object and thats why we need TEXT at object *
+        var infoDiv = $('<div></div>').html(markup);
+        //creating elment of div with the text of markup
+        
+        infoDiv.find('a').each(function() { $(this).replaceWith($(this).html()); });
+        // remove links as they will not work
+
+        infoDiv.find('sup').remove();
+     		// remove any references
+
+        infoDiv.find('.mw-ext-cite-error').remove();
+    	 // remove cite error
+        var paragraphContentArr=($(infoDiv).find('.mw-parser-output>p'))
+        var textofParagraphContent=''
+        var pContentWithTags=textofParagraphContent
+        for(var k=0;k<paragraphContentArr.length;k++){
+            pContentWithTags+=("<p>"+paragraphContentArr[k].innerHTML+'</p>')
+            
+        }
+        console.log(pContentWithTags)
+        $('.infoContainer').text(pContentWithTags)
+    
+}
+
+
+
+
+
+function getNasaData() {
+    // const q = $('#query').val();
+    for (let eachBody in solarBodies){
+
+        var NasaImagesObject= {
+            url: 'https://images-api.nasa.gov/search?q='+eachBody,
+            method: 'GET',
+            success: resp => {
+                console.log('RESP:', resp);
+                // for (let eachBody in solarBodies){
+                for(let i=0;i<solarBodies.eachBody.nasaPicture.length;i++){
+                    var divToAppend = $("<div>")
+                    var imagePath=resp.collection.items[eachbody[i]].links[0].href;
+                    divToAppend.css({"background-image": "url("+imagePath+")","height": "100vh","display":"in-block", "background-repeat": "no-repeat"})
+                    $('body').append(divToAppend);
+                    $.ajax(NasaImagesObject);
+                }
+
+            }
+            
+        };
+    }
+}
