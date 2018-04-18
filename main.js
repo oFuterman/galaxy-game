@@ -350,7 +350,7 @@ function parseWikiText(data) {
             
         }
         // console.log(pContentWithTags)
-        $('#contentDiv').append(pContentWithTags)
+        $('#contentDiv').append(pContentWithTags).addClass('changeText')
         console.log(pContentWithTags)
 
     
