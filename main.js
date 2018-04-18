@@ -174,7 +174,9 @@ function renderPlanetInfoInModal(planet){
         "id" : "infoButton",
         text: "Information",
         "on" : {
-            'click': infoButtonHandler
+            'click': function(){
+                infoButtonHandler(planet)
+            }
         },
     });
     var videosButton = $("<button>", {
@@ -239,8 +241,9 @@ function renderPlanetInfoInModal(planet){
     $("#displayModal").show();
 }
 
-function infoButtonHandler() {
-    getWikiText(planet)
+function infoButtonHandler(planet) {
+    $('#contentDiv').empty();
+    getWikiText(planet);
 }
 
 function imagesButtonHandler() {
