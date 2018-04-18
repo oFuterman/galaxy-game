@@ -26,8 +26,9 @@ function initializeApp(){
             event.stopPropagation();
         })
     }
-    // getDataFromYoutube();
-    getNasaData();
+    getDataFromYoutube();
+    populatePictureArr();
+
 
 }
 
@@ -209,8 +210,9 @@ function parseWikiText(data) {
             pContentWithTags+=("<p>"+paragraphContentArr[k].innerHTML+'</p>')
             
         }
-        // console.log(pContentWithTags)
-        $('.infoContainer').text(pContentWithTags)
+        console.log(pContentWithTags)
+        $('#bodyId').append(pContentWithTags)
+
     
 }
 
@@ -218,26 +220,26 @@ function parseWikiText(data) {
 
 
 
-function getNasaData() {
+function populatePictureArr() {
     // const q = $('#query').val();
     for (let eachBody in solarBodies){
-
         var NasaImagesObject= {
             url: 'https://images-api.nasa.gov/search?q='+eachBody,
             method: 'GET',
             success: resp => {
                 console.log('RESP:', resp);
                 // for (let eachBody in solarBodies){
-                for(let i=0;i<solarBodies.eachBody.nasaPicture.length;i++){
-                    var divToAppend = $("<div>");
-                    var imagePath=resp.collection.items[eachbody[i]].links[0].href;
-                    divToAppend.css({"background-image": "url("+imagePath+")","height": "100vh","display":"in-block", "background-repeat": "no-repeat"})
-                    $('body').append(divToAppend);
-                    $.ajax(NasaImagesObject);
+                for(let i=0;i<solarBodies[eachBody].nasaPicture.length;i++){
+                    var divToAppend = $("<div>")
+                    var imagePath=resp.collection.items[solarBodies[eachBody].nasaPicture[i]].links[0].href;
+                    solarBodies[eachBody].nasaPicture[i]=imagePath
+                    
+
                 }
 
             }
             
-        };
+        }
+        $.ajax(NasaImagesObject)
     }
 }
