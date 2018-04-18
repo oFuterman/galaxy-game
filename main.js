@@ -38,8 +38,6 @@ function displayPlanetInfo(){
 }
 
 function getDataFromYoutube(planetInfo) {
-    console.log('get data running');
-    console.log(planetInfo);
         var youtubeAjaxObject = {
             'dataType': 'json',
             'url': 'http://s-apis.learningfuze.com/hackathon/youtube/search.php',
@@ -55,7 +53,6 @@ function getDataFromYoutube(planetInfo) {
                 var currentSolarBodiesArr = Object.keys(result.data);
                 console.log(Object.keys(result.data));
                 solarBodies.planetInfo = currentSolarBodiesArr;
-                //function to display videos in the modal
                 renderVideosOnModal(currentSolarBodiesArr);
             },
             'error': function (error) {
@@ -77,17 +74,9 @@ function renderPhotosOnModal () {
         "src": "images/editsun.jpg"
     });
     $("#contentDiv").append(photosToRender);
-
-
     console.log("button works")
-
 }
 
-{/*<div id="videoModal" class="modalShadow">*/}
-{/*<div id="videoModalBody" class="modalBody">*/}
-{/*<iframe id="videoPlayer" width="560" height="315" src="" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>*/}
-{/*</div>*/}
-{/*</div>*/}
 function renderVideosOnModal (currentSolarBodiesArr) {
     var vidModal = $("<div>", {
         "class" : "videoModal",
@@ -254,8 +243,8 @@ function imagesButtonHandler(planet) {
 }
 
 function videoButtonHandler(planet) {
+    $('#contentDiv').empty();
     getDataFromYoutube (planet);
-    // console.log(planet)
 }
 
 
@@ -270,9 +259,9 @@ function loadAndPlayVideo(link, planet){
     $("#videoPlayer").attr('src','https://www.youtube.com/embed/' + link )
 }
 
+//omers doing his random things down here---------------------------------
+
 function getWikiText(planet) {
-    // var solarBodies = ["sun", "mercury", "venus", "earth", "mars", "jupiter", "saturn", "uranus", "neptune", "pluto"];
-    // for (solarIndex = 0; solarIndex < solarBodies.length; solarIndex++) {
     if( planet ==='mercury')  {
         var link='Mercury_(planet)'
         var wikiAjaxObject = {
@@ -324,8 +313,7 @@ getWikiText();
 
 function parseWikiText(data) {
     var markup = data.parse.text["*"];
-               //the * is a bad variable name, as an object it can be named ANYTHING. 
-               //the ajax call starts with the outer most object which is DATA (that is what is passed in as an arguement,
+               //the ajax call starts with the outer most object which is DATA (that is what is passed in as an argument,
                //then the next one is PARSE which is also an object and thats why we need TEXT at object *
         var infoDiv = $('<div></div>').html(markup);
         //creating elment of div with the text of markup
@@ -338,15 +326,15 @@ function parseWikiText(data) {
 
         infoDiv.find('.mw-ext-cite-error').remove();
     	 // remove cite error
-        var paragraphContentArr=($(infoDiv).find('.mw-parser-output>p'))
-        var textofParagraphContent=''
-        var pContentWithTags=textofParagraphContent
+        var paragraphContentArr=($(infoDiv).find('.mw-parser-output>p'));
+        var textofParagraphContent='';
+        var pContentWithTags=textofParagraphContent;
         for(var k=0;k<paragraphContentArr.length;k++){
             pContentWithTags+=("<p>"+paragraphContentArr[k].innerHTML+'</p>')
             
         }
         // console.log(pContentWithTags)
-        $('#contentDiv').append(pContentWithTags)
+        $('#contentDiv').append(pContentWithTags);
         console.log(pContentWithTags)
 
     
@@ -362,7 +350,7 @@ function populatePictureArr() {
                 // console.log('RESP:', resp);
                 // for (let eachBody in solarBodies){
                 for(let i=0;i<solarBodies[eachBody].nasaPicture.length;i++){
-                    var divToAppend = $("<div>")
+                    var divToAppend = $("<div>");
                     var imagePath=resp.collection.items[solarBodies[eachBody].nasaPicture[i]].links[0].href;
                     solarBodies[eachBody].nasaPicture[i]=imagePath
                     
@@ -371,7 +359,7 @@ function populatePictureArr() {
 
             }
             
-        }
+        };
         $.ajax(NasaImagesObject)
     }
 }
