@@ -87,7 +87,7 @@ function renderPlanetInfoInModal(planet){
             text: 'video '+videoCodeIterator,
             on: {
                 click: function(){
-                    loadAndPlayVideo(planetInfo.videos[i]);
+                    loadAndPlayVideo(planetInfo.videos[videoCodeIterator]);
                 }
             }
         });
