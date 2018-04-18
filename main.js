@@ -1,3 +1,6 @@
+
+$(document).ready(initializeSolarApp);
+
 var solarBodies = {
 
     "sun":{ wikiLink: null, videos: [], nasaPicture: [8,26,44]},
@@ -12,9 +15,9 @@ var solarBodies = {
     "pluto":{ wikiLink: null, videos: [], nasaPicture: [4,3,1,2]}
 };
 
-$(document).ready(initializeApp);
+function initializeSolarApp(){
 
-function initializeApp(){
+        startModalClickHandler ();
     for(let planet in solarBodies){
         $(`.${planet}Div`).click( function(){
             renderPlanetInfoInModal(planet);
@@ -26,18 +29,29 @@ function initializeApp(){
             event.stopPropagation();
         })
     }
-    // getDataFromYoutube();
     populatePictureArr();
     $('.jupiterDiv').on('click',function(){
         createCarousel(solarBodies['saturn'].nasaPicture);
     });
 }
 
+function startModalClickHandler () {
+    console.log("click");
+    $("#bodyId").click(hideStartModal)
+
+
+}
+
+function hideStartModal () {
+    console.log("hideModal");
+    $("#startModal").hide();
+}
 function displayPlanetInfo(){
 
 }
 
 function getDataFromYoutube(planetInfo) {
+
     var youtubeAjaxObject = {
         'dataType': 'json',
         'url': 'http://s-apis.learningfuze.com/hackathon/youtube/search.php',
@@ -54,12 +68,13 @@ function getDataFromYoutube(planetInfo) {
             var currentSolarBodiesArr = Object.keys(result.data);
             console.log(Object.keys(result.data));
             solarBodies.planetInfo = currentSolarBodiesArr;
-            renderVideosOnModal(currentSolarBodiesArr);
+            renderVideosOnModal(currentSolarBodiesArr, planetInfo);
         },
         'error': function (error) {
             console.log(error)
         }
     };
+
     $.ajax(youtubeAjaxObject);
 }
 
@@ -78,7 +93,7 @@ function renderPhotosOnModal () {
     console.log("button works")
 }
 
-function renderVideosOnModal (currentSolarBodiesArr) {
+function renderVideosOnModal (currentSolarBodiesArr, planet) {
     var vidModal = $("<div>", {
         "class" : "videoModal",
         "id" : "videoModal",
@@ -90,15 +105,15 @@ function renderVideosOnModal (currentSolarBodiesArr) {
 
     });
     var iFrame = $("<iframe>", {
+        "class": 'videoPlayer',
         "id" : "videoPlayer",
         "width" : "560",
         "height" : "315",
         "src" : "",
         "frameborder" : "0",
         "allow" : "autoplay; encrypted-media",
-        // allowFullscreen
 
-    });
+    }).attr("allowFullscreen","allowFullscreen");
     $("#contentDiv").append(vidModal, vidModalBody, iFrame);
 
 
@@ -106,7 +121,8 @@ function renderVideosOnModal (currentSolarBodiesArr) {
     var videoElements = [];
     for(let videoCodeIterator=0; videoCodeIterator<currentSolarBodiesArr.length; videoCodeIterator++){
         var videoLink = $("<li>", {
-            text: 'video '+videoCodeIterator,
+            text: planet +' video '+(videoCodeIterator+1),
+            'class': 'videoList',
             on: {
                 click: function(){
                     loadAndPlayVideo(currentSolarBodiesArr[videoCodeIterator]);
@@ -119,6 +135,7 @@ function renderVideosOnModal (currentSolarBodiesArr) {
 
     $("#contentDiv").append(videoList);
 }
+
 function loadAndPlayVideo(link, planet){
     $("#videoModal").show();
     $("#videoPlayer").attr('src','https://www.youtube.com/embed/' + link )
@@ -138,7 +155,7 @@ function renderPlanetInfoInModal(planet){
     var planetTitle = $("<div>",{
         'class': 'modalTitle',
         "id":"modalTitle",
-        text: planet,
+        text: planet.toUpperCase(),
         'on': {
             'click': removeModal
         }
@@ -249,6 +266,7 @@ function videoButtonHandler(planet) {
     $('#contentDiv').empty();
     addLoader();
     getDataFromYoutube (planet);
+    // videoCarousel();
 }
 
 
@@ -267,7 +285,7 @@ function loadAndPlayVideo(link, planet){
 
 function getWikiText(planet) {
     if( planet ==='mercury')  {
-        var link='Mercury_(planet)'
+        var link='Mercury_(planet)';
         var wikiAjaxObject = {
 
 
@@ -289,7 +307,7 @@ function getWikiText(planet) {
         };
         $.ajax(wikiAjaxObject);
     } else {
-        console.log(planet)
+        console.log(planet);
         var wikiAjaxObject = {
 
             // Mercury_(planet)
@@ -299,6 +317,7 @@ function getWikiText(planet) {
                 // console.log(data);
                 // var solarBodies = {
                 //     "sun":{ wikiLink: null, videos: [], nasaText: ''},
+
                 solarBodies[planet].wikiLink='https://en.wikipedia.org/wiki/'+planet
                 removeLoader()
                 parseWikiText(data)
@@ -316,6 +335,7 @@ getWikiText();
 
 function parseWikiText(data) {
     var markup = data.parse.text["*"];
+
     //the ajax call starts with the outer most object which is DATA (that is what is passed in as an argument,
     //then the next one is PARSE which is also an object and thats why we need TEXT at object *
     var infoDiv = $('<div></div>').html(markup);
@@ -339,7 +359,9 @@ function parseWikiText(data) {
     // console.log(pContentWithTags)
     removeLoader();
     $('#contentDiv').append(pContentWithTags);
+    $('#contentDiv').append(pContentWithTags).addClass('changeText')
     console.log(pContentWithTags)
+
 
 
 }
@@ -376,10 +398,10 @@ function createCarousel(planetStr){
     });
     $('.contentDiv').append(carouselContainer);//inside this selector pick where the carousel should go
     for(var i=0; i<images.length; i++){
-        console.log('i:',i);
-        var planetImageContainer= $('<div>');
+        var planetImageContainer= $('<div>',{
+            "class" : "carouselImages"});
         $('.carouselContainer').append(planetImageContainer);
-        planetImageContainer.css({"background-image":'url('+images[i]+')','height':'300px','width':'300px'});
+        planetImageContainer.css({"background-image":'url('+images[i]+')'});
         if(i===0){
             planetImageContainer.addClass('currentImage');
             planetImageContainer.addClass('hide');
@@ -400,6 +422,7 @@ function rotate(){
     }
 }
 
+
 function addLoader(){
     var loaderDiv=$('<div>',{
         'class':'loader'
@@ -410,3 +433,57 @@ function addLoader(){
 function removeLoader(){
     $('.contentDiv').empty();
 }
+
+// video carousel
+// function videoCarousel() {
+//     console.log("video carousel function entered");
+//     let containerDiv = $("<div>", {
+//         'class': 'container'
+//     });
+//     let carouselDiv = $("<div>", {
+//         'class': 'carousel'
+//     });
+//     let video1 = $("<div>", {
+//         'class': 'item a'
+//     });
+//     let video2 = $("<div>", {
+//         'class': 'item b'
+//     });
+//     let video3 = $("<div>", {
+//         'class': 'item c'
+//     });
+//     let nextButton = $("<div>", {
+//         'class': 'next',
+//         'text': 'next'
+//     });
+//     let prevButton = $("<div>", {
+//         'class': 'prev',
+//         'text': 'prev'
+//     });
+//     let carousel = $(".carousel"),
+//         currdeg  = 0;
+//
+//     containerDiv.append(carouselDiv);
+//     carouselDiv.append(video1, video2, video3);
+//     containerDiv.append(nextButton, prevButton);
+//     $("body").append(containerDiv);
+//
+//     $(".next").on("click", { d: "n" }, rotate);
+//     $(".prev").on("click", { d: "p" }, rotate);
+//
+//     function rotate(e){
+//         if(e.data.d==="n"){
+//             currdeg = currdeg - 60;
+//         }
+//         if(e.data.d==="p"){
+//             currdeg = currdeg + 60;
+//         }
+//         carousel.css({
+//             "-webkit-transform": "rotateY("+currdeg+"deg)",
+//             "-moz-transform": "rotateY("+currdeg+"deg)",
+//             "-o-transform": "rotateY("+currdeg+"deg)",
+//             "transform": "rotateY("+currdeg+"deg)"
+//         });
+//     }
+// }
+
