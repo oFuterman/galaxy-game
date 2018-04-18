@@ -270,7 +270,7 @@ body {
 }
 
 .changeText{
-    overflow: scroll;
+    overflow: auto;
     text:5vh
 }
 
