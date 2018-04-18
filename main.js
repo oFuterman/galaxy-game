@@ -1,35 +1,40 @@
 
+var solarBodies = {
+    "sun":{ wikiLink: null, videos: [], nasaPicture: ''},
+    "mercury":{ wikiLink: null, videos: [], nasaPicture: ''},
+    "venus":{ wikiLink: null, videos: [], nasaPicture: ''},
+    "earth":{ wikiLink: null, videos: [], nasaPicture: ''},
+    "mars":{ wikiLink: null, videos: [], nasaPicture: ''},
+    "uranus":{ wikiLink: null, videos: [], nasaPicture: ''},
+    "jupiter":{ wikiLink: null, videos: [], nasaPicture: ''},
+    "saturn":{ wikiLink: null, videos: [], nasaPicture: ''},
+    "neptune":{ wikiLink: null, videos: [], nasaPicture: ''},
+    "pluto":{ wikiLink: null, videos: [], nasaPicture: ''}
+};
+
 $(document).ready(initializeApp);
-var global_result;
+
 function initializeApp(){
-    // $('button').click(getData);
+    // $('button').click(getDataFromYoutube);
+    for(let planet in solarBodies){
+        $(`.${planet}Div`).click( function(){
+            renderPlanetInfoInModal(planet);
+        });
+        $(".modalShadow").click(function(){
+            $(this).hide();
+        });
+        $(".modalBody").click(function(){
+            event.stopPropagation();
+        })
+    }
 }
-//
-// function getData(){
-//     console.log('1) getData called');
-//     var ajaxConfig = {
-//         dataType: 'json',
-//         url: 'http://ax.itunes.apple.com/WebObjects/MZStoreServices.woa/ws/RSS/topMovies/json',
-//         success: function(result) {
-//             global_result = result;
-//             console.log('2) AJAX Success function called, with the following result:', result);
-//         }
-//     };
-//
-//     console.log('3) Making AJAX request');
-//     $.ajax(ajaxConfig);
-//
-//     console.log('4) End of getData');
-// }
-// getData();
-// // function addToDom() {
-// // }
+
+function displayPlanetInfo(){
+
+}
 
 function getDataFromYoutube() {
-    // var solarBodies = ["sun", "mercury", "venus", "earth", "mars", "uranus", "neptune", "pluto"];
-    var solarBodies = {"sun":null, "mercury":null, "venus":null, "earth":null, "mars":null, "uranus":null, "neptune":null, "pluto":null};
-    // for (solarIndex = 0; solarIndex < solarBodies.length; solarIndex++) {
-    for (var eachBody in solarBodies){
+    for (let eachBody in solarBodies){
         var youtubeAjaxObject = {
             'dataType': 'json',
             'url': 'http://s-apis.learningfuze.com/hackathon/youtube/search.php',
@@ -42,9 +47,9 @@ function getDataFromYoutube() {
                 'detailLevel': 'verbose'
             },
             'success': function (result) {
-                // renderVideosOnDom()
-                solarBodies[eachBody] = Object.keys(result.data);
-                console.log(solarBodies[eachBody]);
+                var currentSolarBodiesArr = Object.keys(result.data);
+                console.log(Object.keys(result.data));
+                solarBodies[eachBody].videos = currentSolarBodiesArr;
             },
             'error': function (error) {
                 console.log(error)
@@ -52,15 +57,53 @@ function getDataFromYoutube() {
         };
     $.ajax(youtubeAjaxObject);
     }
-    console.log(solarBodies)
 }
 
-function renderVideosOnDom() {
-    var vidSRC = "https://www.youtube.com/embed/"+solarBodies[eachBody][0];
+// function renderVideoLinksOnDom(solarBodyVideoArray, planet) {
+//         $("."+planet+ "Div").click(function(){
+//             loadAndPlayVideo( solarBodyVideoArray[0], planet)
+//         }).addClass('clickable')
+// }
 
-// <iframe width="560" height="315" src="https://www.youtube.com/embed/B2e-UQge8B8"
-//     frameborder="0" allow="autoplay; encrypted-media"
-//     allowfullscreen></iframe>
+function renderPlanetInfoInModal(planet){
+    $("#modalBody").empty();
+    var planetInfo = solarBodies[planet];
+    var infoContainer = $("<div>",{
+        'class': 'infoContainer'
+    })
+    var planetTitle = $("<div>",{
+        'class': 'planetTitle',
+        text: planet
+    });
+    var planetWikiLink = $("<a>",{
+        target:"_blank",
+        href:planetInfo.wikiLink,
+        text: planet + " wiki info"
+    });
+    var videoList = $("<ul>").addClass('videoListContainer');
+    var videoElements = [];
+    for(let videoCodeIterator=0; videoCodeIterator<planetInfo.videos.length; videoCodeIterator++){
+        var videoLink = $("<li>", {
+            text: 'video '+videoCodeIterator,
+            on: {
+                click: function(){
+                    loadAndPlayVideo(planetInfo.videos[i]);
+                }
+            }
+        });
+        videoElements.push( videoLink )
+    }
+    videoList.append(videoElements);
+    infoContainer.append(planetTitle, planetWikiLink, videoList);
+    $("#modalBody").append(infoContainer);
+    $("#infoModal").show();
+}
+
+function loadAndPlayVideo(link, planet){
+    $("#videoModal").show();
+    $("#videoPlayer").attr('src','https://www.youtube.com/embed/' + link )
 }
 
 getDataFromYoutube();
+
+//omers doing his random shit down here---------------------------------

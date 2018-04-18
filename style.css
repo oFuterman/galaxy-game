@@ -193,6 +193,28 @@ body {
 
 }
 
+.modalShadow{
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100vh;
+    width: 100vw;
+    background-color: rgba(0,0,0,.4);
+    display: none;
+}
+.modalBody{
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    background-color: white;
+}
+.clickable{
+    border: 1px solid lime;
+    cursor: pointer;
+}
+
 .displayModal {
     overflow: hidden;
     display: block;
