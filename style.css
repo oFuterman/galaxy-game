@@ -153,9 +153,7 @@ body {
     width: 18%;
     border-radius: 50%;
     cursor: pointer;
-    /*background-color: mediumpurple;*/
-    background-blend-mode: exclusion;
-    background-image: url("images/saturn-background.jpg"), url("images/starfield.png");
+    background-image: url("images/saturn-vector.png");
     background-position: center;
     background-size: cover;
 
@@ -193,23 +191,23 @@ body {
 
 }
 
-.modalShadow{
-    position: fixed;
-    left: 0;
-    top: 0;
-    height: 100vh;
-    width: 100vw;
-    background-color: rgba(0,0,0,.4);
-    display: none;
-}
-.modalBody{
-    position: fixed;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    padding: 20px;
-    background-color: white;
-}
+/*.modalShadow{*/
+    /*position: fixed;*/
+    /*left: 0;*/
+    /*top: 0;*/
+    /*height: 100vh;*/
+    /*width: 100vw;*/
+    /*background-color: rgba(0,0,0,.4);*/
+    /*display: none;*/
+/*}*/
+/*.modalBody{*/
+    /*position: fixed;*/
+    /*left: 50%;*/
+    /*top: 50%;*/
+    /*transform: translate(-50%, -50%);*/
+    /*padding: 20px;*/
+    /*background-color: white;*/
+/*}*/
 .clickable{
     border: 1px solid lime;
     cursor: pointer;
@@ -217,7 +215,7 @@ body {
 
 .displayModal {
     overflow: hidden;
-    display: block;
+    display: none;
     position: absolute;
     height: 70%;
     width: 50%;
@@ -227,13 +225,21 @@ body {
     border-radius: 15%;
     left: 25%;
 }
+.modalTitle {
+    display: inline-block;
+    position: relative;
+    text-align: center;
+    height: 15%;
+    width: 100%;
+    font-size: 7vmin;
+}
 
 .modalControls {
-    display: block;
+    display: inline-block;
     position: relative;
     height: 15%;
     width: 100%;
-    top: 85%;
+    top: 69%;
 
 }
 

@@ -66,15 +66,38 @@ function getDataFromYoutube() {
 // }
 
 function renderPlanetInfoInModal(planet){
-    $("#modalBody").empty();
+    $("#displayModal").empty();
+
     var planetInfo = solarBodies[planet];
     var infoContainer = $("<div>",{
-        'class': 'infoContainer'
-    })
+        'class': 'displayModal',
+        "id": "displayModal"
+    });
     var planetTitle = $("<div>",{
-        'class': 'planetTitle',
+        'class': 'modalTitle',
+        "id":"modalTitle",
         text: planet
     });
+    var modalControls = $("<div>", {
+        "class": "modalControls",
+        "id": "modalControls"
+    });
+    var imagesButton = $("<button>", {
+        "class": "images buttons",
+        "id" : "imageButton",
+        text: "Images"
+    });
+    var informationButton = $("<button>", {
+        "class": "information buttons",
+        "id" : "infoButton",
+        text: "Information"
+    });
+    var videosButton = $("<button>", {
+        "class": "videos buttons",
+        "id" : "videoButton",
+        text: "Videos"
+    });
+
     var planetWikiLink = $("<a>",{
         target:"_blank",
         href:planetInfo.wikiLink,
@@ -94,9 +117,10 @@ function renderPlanetInfoInModal(planet){
         videoElements.push( videoLink )
     }
     videoList.append(videoElements);
-    infoContainer.append(planetTitle, planetWikiLink, videoList);
-    $("#modalBody").append(infoContainer);
-    $("#infoModal").show();
+    modalControls.append(imagesButton, informationButton, videosButton);
+    infoContainer.append(planetTitle, modalControls);
+    $("#bodyId").append(infoContainer);
+    $("#displayModal").show();
 }
 
 function loadAndPlayVideo(link, planet){
