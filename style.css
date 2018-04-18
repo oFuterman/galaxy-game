@@ -282,5 +282,12 @@ body {
     width: 100%;
     /*background-color: #ffb3b3;*/
     top: 0;
+}
 
+.hide{
+    display:none;
+}
+
+.currentImage{
+    display:block;
 }
