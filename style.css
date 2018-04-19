@@ -244,8 +244,8 @@ body{
 }
 
 .changeText{
-    overflow: scroll;
-    font-size:3vh
+    overflow: auto;
+    font-size:3vh;
 }
 
 
