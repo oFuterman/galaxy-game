@@ -271,7 +271,7 @@ body {
 
 .changeText{
     overflow: auto;
-    text:5vh
+    font-size:3vh;
 }
 
 
