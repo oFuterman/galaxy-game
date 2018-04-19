@@ -134,12 +134,11 @@ body {
     width: 7%;
     top: 44%;
     right: 47%;
-    background-color: red;
-    border-radius: 50%;
     cursor: pointer;
     background-image: url(images/marsImage.png);
     background-position: center;
-    background-size: cover;
+    background-size: contain;
+    background-repeat:no-repeat;
 
 }
 
@@ -148,14 +147,13 @@ body {
     position: absolute;
     height: 26%;
     width: 15%;
-    background-color: orange;
     left: 61%;
-    border-radius: 50%;
     bottom: 32%;
     cursor: pointer;
     background-image: url(images/jupiterImage.png);
     background-position: center;
-    background-size: cover;
+    background-size: contain;
+    background-repeat: no-repeat;
 
 }
 
@@ -180,11 +178,11 @@ body {
     width: 8%;
     left: 77%;
     bottom: 64%;
-    border-radius: 50%;
     cursor: pointer;
     background-image: url(images/uranusImage2.png);
     background-position: center;
-    background-size: cover;
+    background-size: contain;
+    background-repeat: no-repeat;
 
 }
 
