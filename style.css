@@ -158,7 +158,7 @@ body{
     height: 22%;
     width: 24%;
     border-radius: 26%;
-    top: 17%;
+    top: 70%;
     left: 61%;
     cursor: pointer;
     background-image: url(images/saturnImage2.png);
@@ -536,6 +536,6 @@ ul {
 }
 
 .saturnDiv:hover{
-    height:18%;
-    width:19%;
+    height:24%;
+    width:26%;
 }
