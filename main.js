@@ -320,8 +320,8 @@ function getWikiText(planet) {
                 // var solarBodies = {
                 //     "sun":{ wikiLink: null, videos: [], nasaText: ''},
 
-                solarBodies[planet].wikiLink='https://en.wikipedia.org/wiki/'+planet
-                removeLoader()
+                solarBodies[planet].wikiLink='https://en.wikipedia.org/wiki/'+planet;
+                removeLoader();
                 parseWikiText(data)
             },
 
