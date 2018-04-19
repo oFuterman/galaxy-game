@@ -310,6 +310,7 @@ function getWikiText(planet) {
             'dataType': 'json',
             'url': 'https://en.wikipedia.org/w/api.php?action=parse&format=json&prop=text&section=0&page='+link+"&callback=?",
             'success': function(data){
+
                 solarBodies[planet].wikiLink='https://en.wikipedia.org/wiki/'+link
                 removeLoader();
                 parseWikiText(data)
@@ -384,7 +385,17 @@ function createCarousel(planetStr){
     var carouselContainer=$('<div>',{
         'class':'carouselContainer'
     });
-    $('.contentDiv').append(carouselContainer);//inside this selector pick where the carousel should go
+    var textOverlayDiv = $("<div>", {
+        'class': 'text-overlay-div'
+    }).append($('<span>', {
+        'text':'IMAGES FROM NASA (CLICK TO SEE MORE)'
+    }));
+    // var arrowDiv = $("<div>", {
+    //     'class': 'arrow',
+    //     'text': '>',
+    // });
+
+    $('.contentDiv').append(carouselContainer, textOverlayDiv);//inside this selector pick where the carousel should go
     for(var i=0; i<images.length; i++){
         var planetImageContainer= $('<div>',{
             "class" : "carouselImages"});
@@ -397,6 +408,7 @@ function createCarousel(planetStr){
             planetImageContainer.addClass('hide');
         }
     }
+    // $('.carouseContainer').append(overlayDiv);
     $('.carouselContainer > div').on('click', rotate);
 }
 
