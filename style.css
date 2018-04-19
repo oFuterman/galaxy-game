@@ -1,22 +1,12 @@
 * {
     box-sizing: border-box;
-
+    font-family: Futura, "Trebuchet MS", Arial, sans-serif;
 }
 
-body {
-    font-size: 0;
+body{
     height: 100vh;
     width: 100vw;
-}
-
-
-.header {
-    display: inherit;
-    position: relative;
-    text-align: center;
-    height: 15%;
-    width: 100%;
-
+    overflow: hidden;
 }
 .title {
     font-size: 10vmin;
@@ -30,22 +20,27 @@ body {
     top: 15%;
     text-align: center;
     border-radius: 10%;
-    background-color: rgba(157, 157, 157, 0.71);
-    z-index: 5;
+    background-color: rgba(157, 157, 157, 0.8);
+    z-index: 1;
+    color: white;
+    box-shadow: 0 4px 8px 0 rgba(255,255,255, 0.2), 0 6px 40px 0 rgba(255,255,255, 0.19);
+    overflow: auto;
 }
 
 .startModalTitle {
     display: inline-block;
     position: relative;
-    top: 4vh;
+    top: 1vh;
     font-size: 8vmin;
+    color: #fff;
+    text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 20px #ff0080, 0 0 30px #ff0080, 0 0 40px #ff0080, 0 0 55px #ff0080, 0 0 75px #ff0080;
 }
 .startModalP1, .startModalP2, .startModalP3 {
     display: inline-block;
     position: relative;
-    font-size: 3vmin;
+    font-size: 4vmin;
     top: 6vmin;
-    margin: 4px;
+    margin: 2%;
 }
 
 .mainDisplayDiv {
@@ -58,6 +53,7 @@ body {
     background-position: center;
     background-size: cover;
 }
+
 
 .footer {
     display: inherit;
@@ -85,14 +81,13 @@ body {
     position: absolute;
     height: 13%;
     width: 10%;
-    top: 77%;
-    right: 61%;
+    top: 60%;
+    right: 75%;
     cursor: pointer;
     background-image: url(images/mercuryImage2.png);
     background-repeat: no-repeat;
     background-position: center;
     background-size: contain;
-    
 
 }
 
@@ -103,7 +98,7 @@ body {
     height: 19%;
     width: 10%;
     border-radius: 50%;
-    top: 54%;
+    top: 34%;
     left: 22%;
     cursor: pointer;
     background-image: url(images/venuscheck.png);
@@ -116,8 +111,8 @@ body {
     height: 18%;
     width: 18%;
     border-radius: 50%;
-    left: 38%;
-    bottom: 16%;
+    left: 30%;
+    bottom: 26%;
     cursor: pointer;
     background-image: url(images/earthImage2.png);
     background-position: center;
@@ -128,14 +123,14 @@ body {
 
 
 .marsDiv {
-    display: inherit;
     position: absolute;
     height: 13%;
     width: 7%;
+
     top: 44%;
     right: 47%;
     cursor: pointer;
-    background-image: url(images/marsImage.png);
+    background-image: url("images/marsImage.png");
     background-position: center;
     background-size: contain;
     background-repeat:no-repeat;
@@ -149,6 +144,7 @@ body {
     width: 15%;
     left: 61%;
     bottom: 32%;
+
     cursor: pointer;
     background-image: url(images/jupiterImage.png);
     background-position: center;
@@ -159,11 +155,11 @@ body {
 
 .saturnDiv {
     position: absolute;
-    height: 16%;
-    width: 17%;
-    border-radius: 50%;
-    bottom: 4%;
-    left: 70%;
+    height: 22%;
+    width: 24%;
+    border-radius: 26%;
+    top: 17%;
+    left: 61%;
     cursor: pointer;
     background-image: url(images/saturnImage2.png);
     background-position: center;
@@ -192,7 +188,7 @@ body {
     width: 8%;
     left: 89%;
     border-radius: 50%;
-    bottom: 53%;
+    top: 4%;
     cursor: pointer;
     background-image: url(images/neptuneImage2.png);
     background-position: center;
@@ -200,23 +196,6 @@ body {
     background-repeat: no-repeat;
 }
 
-/*.modalShadow{*/
-    /*position: fixed;*/
-    /*left: 0;*/
-    /*top: 0;*/
-    /*height: 100vh;*/
-    /*width: 100vw;*/
-    /*background-color: rgba(0,0,0,.4);*/
-    /*display: none;*/
-/*}*/
-/*.modalBody{*/
-    /*position: fixed;*/
-    /*left: 50%;*/
-    /*top: 50%;*/
-    /*transform: translate(-50%, -50%);*/
-    /*padding: 20px;*/
-    /*background-color: white;*/
-/*}*/
 .clickable{
     border: 1px solid lime;
     cursor: pointer;
@@ -234,6 +213,7 @@ body {
     border-radius: 15%;
     left: 25%;
     color: white;
+    box-shadow: 0 4px 8px 0 rgba(255,255,255, 0.2), 0 6px 20px 0 rgba(255,255,255, 0.19);
 }
 .modalTitle {
     display: inline-block;
@@ -254,10 +234,12 @@ body {
 }
 
 .contentDiv {
+    position: relative;
     height: 70%;
     width: 100%;
     background-color: rgba(0,0,0,.8);
     color: white;
+    box-shadow: 0 4px 8px 0 rgba(255,255,255, 0.2), 0 6px 20px 0 rgba(255,255,255, 0.19);
 }
 
 .buttons:focus {
@@ -266,7 +248,7 @@ body {
 
 .changeText{
     overflow: auto;
-    text:5vh
+    font-size:3vh;
 }
 
 
@@ -314,6 +296,21 @@ body {
 
 }
 
+
+html, body {
+    margin:0; overflow:hidden;
+}
+
+img {
+    width: 8vw;
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    margin: auto;
+}
+
 .carouselContainer {
      position: relative;
      height: 100%;
@@ -349,7 +346,7 @@ body {
     animation: spin 0.5s linear infinite;
     position: relative;
     top:42.5%;
-    left:42.5%;
+    left:47%;
 }
 
 @keyframes spin {
@@ -358,13 +355,6 @@ body {
     50% { transform: rotate(105deg);}
     75% { transform: rotate(220deg);}
     100% { transform: rotate(360deg);}
-}
-
-/* video modal */
-body {
-    background: #333;
-    padding: 70px 0;
-    font: 15px/20px Arial, sans-serif;
 }
 
 .container {
@@ -450,7 +440,7 @@ body {
     margin: 0 1%;
     position: relative;
     top: 20%;
-    font-size: 1.5em;
+    font-size: 2.75vmin;
     box-shadow: 0 4px 8px 0 rgba(255,255,255, 0.2), 0 6px 20px 0 rgba(255,255,255, 0.19);
     background-color: rgba(0,255,0,0.3);
     height: 50%;
@@ -473,6 +463,37 @@ ul {
     display: block;
     margin: auto;
 }
+
+.text-overlay-div {
+    position: absolute;
+    height: 10%;
+    width: 100%;
+    bottom: 15%;
+    background-color: pink;
+    color: white;
+    background-color: rgba(0,0,0,.8);
+    text-align: center;
+    font-size: 3vmin;
+}
+
+.text-overlay-div > span {
+    position: relative;
+    text-align: center;
+}
+
+/*.arrow {*/
+    /*box-sizing: border-box;*/
+    /*border-radius: 100%;*/
+    /*background-color: rgba(0,0,0,.8);*/
+    /*height: 2em;*/
+    /*width: 2em;*/
+    /*position: relative;*/
+    /*left: 90%;*/
+    /*bottom: 55%;*/
+    /*text-align: center;*/
+    /*padding-top: 1%;*/
+    /*box-shadow: 0 4px 8px 0 rgba(255,255,255, 0.2), 0 6px 20px 0 rgba(255,255,255, 0.19);*/
+/*}*/
 
 .jupiterDiv:hover{
     height:27%;
