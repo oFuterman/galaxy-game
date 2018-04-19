@@ -29,14 +29,22 @@ function initializeSolarApp(){
             event.stopPropagation();
         })
     }
+
+
+    $(".mainDisplayDiv").on('mousemove', function(){
+        console.log(event.offsetY);
+        $(".mainDisplayDiv").css("background-position-y", -1*event.offsetY + "px");
+        
+    });
+
+    // getDataFromYoutube();
     populatePictureArr();
+    animateBackground($(".mainDisplayDiv"), -.25);
 }
 
 function startModalClickHandler () {
     console.log("click");
     $("#bodyId").click(hideStartModal)
-
-
 }
 
 function hideStartModal () {
@@ -327,6 +335,7 @@ function getWikiText(planet) {
             'dataType': 'json',
             'url': 'https://en.wikipedia.org/w/api.php?action=parse&format=json&prop=text&section=0&page='+planet+"&callback=?",
             'success': function(data){
+
                 solarBodies[planet].wikiLink='https://en.wikipedia.org/wiki/'+planet
                 removeLoader()
                
@@ -379,6 +388,29 @@ function populatePictureArr() {
     }
 }
 
+function animateBackground(element, speed, maxTime=Infinity){
+    element = $(element); 
+    var xpercent=0;
+    var timer = null;
+    var intervalTime = 50; //50 milliseconds
+    var elapsedTime = 0;
+    maxTime *= 1000;
+    
+    function updateBackground(){
+      xpercent+=speed;    // x%  coordinate 
+      elapsedTime+=intervalTime;
+      if(elapsedTime>maxTime){
+        clearInterval(timer);
+      }
+      element.css('background-position-x', xpercent+'%');
+    }
+    timer = setInterval(updateBackground, intervalTime);
+ 
+  }
+
+
+  
+  
 function createCarousel(planetStr){
     removeLoader();
     var images=solarBodies[planetStr].nasaPicture;
