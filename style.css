@@ -3,20 +3,10 @@
     font-family: Futura, "Trebuchet MS", Arial, sans-serif;
 }
 
-body {
-    font-size: 0;
+body{
     height: 100vh;
     width: 100vw;
     overflow: hidden;
-}
-
-.header {
-    display: inherit;
-    position: relative;
-    text-align: center;
-    height: 15%;
-    width: 100%;
-
 }
 .title {
     font-size: 10vmin;
@@ -34,7 +24,7 @@ body {
     z-index: 1;
     color: white;
     box-shadow: 0 4px 8px 0 rgba(255,255,255, 0.2), 0 6px 40px 0 rgba(255,255,255, 0.19);
-    overflow: scroll;
+    overflow: auto;
 }
 
 .startModalTitle {
@@ -165,10 +155,10 @@ body {
 .saturnDiv {
     position: absolute;
     height: 22%;
-    width: 21%;
+    width: 24%;
     border-radius: 26%;
     top: 17%;
-    left: 63%;
+    left: 61%;
     cursor: pointer;
     background-image: url(images/saturnImage2.png);
     background-position: center;
@@ -205,23 +195,6 @@ body {
     background-repeat: no-repeat;
 }
 
-/*.modalShadow{*/
-    /*position: fixed;*/
-    /*left: 0;*/
-    /*top: 0;*/
-    /*height: 100vh;*/
-    /*width: 100vw;*/
-    /*background-color: rgba(0,0,0,.4);*/
-    /*display: none;*/
-/*}*/
-/*.modalBody{*/
-    /*position: fixed;*/
-    /*left: 50%;*/
-    /*top: 50%;*/
-    /*transform: translate(-50%, -50%);*/
-    /*padding: 20px;*/
-    /*background-color: white;*/
-/*}*/
 .clickable{
     border: 1px solid lime;
     cursor: pointer;
@@ -273,8 +246,8 @@ body {
 }
 
 .changeText{
-    overflow: scroll;
-    font-size:3vh
+    overflow: auto;
+    font-size:3vh;
 }
 
 
@@ -357,7 +330,7 @@ body {
     animation: spin 0.5s linear infinite;
     position: relative;
     top:42.5%;
-    left:42.5%;
+    left:47%;
 }
 
 @keyframes spin {
@@ -367,8 +340,6 @@ body {
     75% { transform: rotate(220deg);}
     100% { transform: rotate(360deg);}
 }
-
-/* video modal */
 
 .container {
     margin: 0 auto;
@@ -507,3 +478,48 @@ ul {
     /*padding-top: 1%;*/
     /*box-shadow: 0 4px 8px 0 rgba(255,255,255, 0.2), 0 6px 20px 0 rgba(255,255,255, 0.19);*/
 /*}*/
+
+.jupiterDiv:hover{
+    height:27%;
+    width:18%;
+}
+
+.neptuneDiv:hover{
+    height:17%;
+    width:10%;
+}
+
+.uranusDiv:hover{
+    height:17%;
+    width:10%;
+}
+
+.marsDiv:hover{
+    height:15%;
+    width:9%;
+}
+
+.earthDiv:hover{
+    height:21%;
+    width:21%;
+}
+
+.mercuryDiv:hover{
+    height:15%;
+    width:12%;
+}
+
+.venusDiv:hover{
+    height:21%;
+    width:12%;
+}
+
+.sunDiv:hover{
+    height:75%;
+    width:40%;
+}
+
+.saturnDiv:hover{
+    height:18%;
+    width:19%;
+}
