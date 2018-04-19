@@ -31,15 +31,15 @@ function initializeSolarApp(){
     }
 
 
-    $(".mainDisplayDiv").on('mousemove', function(){
-        console.log(event.offsetY);
-        $(".mainDisplayDiv").css("background-position-y", -1*event.offsetY + "px");
-        
-    });
+    // $(".mainDisplayDiv").on('mousemove', function(){
+    //     console.log(event.offsetY);
+    //     $(".mainDisplayDiv").css("background-position-y", -1*event.offsetY + "px");
+    //
+    // });
 
     // getDataFromYoutube();
     populatePictureArr();
-    animateBackground($(".mainDisplayDiv"), -.25);
+    animateBackground($(".mainDisplayDiv"), -.05);
 }
 
 function startModalClickHandler () {
@@ -300,6 +300,7 @@ function videoButtonHandler(planet) {
 
 function removeModal() {
     $('#displayModal').remove();
+    $('#shadowDiv').remove();
     this.remove()
 }
 
@@ -389,15 +390,15 @@ function populatePictureArr() {
 }
 
 function animateBackground(element, speed, maxTime=Infinity){
-    element = $(element); 
+    element = $(element);
     var xpercent=0;
     var timer = null;
     var intervalTime = 50; //50 milliseconds
     var elapsedTime = 0;
     maxTime *= 1000;
-    
+
     function updateBackground(){
-      xpercent+=speed;    // x%  coordinate 
+        xpercent+=speed;    // x%  coordinate
       elapsedTime+=intervalTime;
       if(elapsedTime>maxTime){
         clearInterval(timer);
@@ -405,7 +406,7 @@ function animateBackground(element, speed, maxTime=Infinity){
       element.css('background-position-x', xpercent+'%');
     }
     timer = setInterval(updateBackground, intervalTime);
- 
+
   }
 
 

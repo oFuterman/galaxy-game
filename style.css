@@ -51,7 +51,7 @@ body{
     width: 100%;
     background-image: url("images/starfield.png");
     background-position: center;
-    background-size: cover;
+    /*background-size: cover;*/
 }
 
 
@@ -108,8 +108,8 @@ body{
 
 .earthDiv {
     position: absolute;
-    height: 18%;
-    width: 18%;
+    height: 12%;
+    width: 12%;
     border-radius: 50%;
     left: 30%;
     bottom: 26%;
@@ -140,8 +140,8 @@ body{
 .jupiterDiv {
     display: inherit;
     position: absolute;
-    height: 26%;
-    width: 15%;
+    height: 30%;
+    width: 22%;
     left: 61%;
     bottom: 32%;
 
@@ -156,8 +156,7 @@ body{
 .saturnDiv {
     position: absolute;
     height: 22%;
-    width: 24%;
-    border-radius: 26%;
+    width: 27%;
     top: 70%;
     left: 61%;
     cursor: pointer;
@@ -496,8 +495,8 @@ ul {
 /*}*/
 
 .jupiterDiv:hover{
-    height:27%;
-    width:18%;
+    height:32%;
+    width:24%;
 }
 
 .neptuneDiv:hover{
@@ -516,8 +515,8 @@ ul {
 }
 
 .earthDiv:hover{
-    height:21%;
-    width:21%;
+    height:14%;
+    width:14%;
 }
 
 .mercuryDiv:hover{
@@ -537,5 +536,5 @@ ul {
 
 .saturnDiv:hover{
     height:24%;
-    width:26%;
+    width:29%;
 }
