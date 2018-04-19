@@ -7,8 +7,8 @@ body {
     font-size: 0;
     height: 100vh;
     width: 100vw;
+    overflow: hidden;
 }
-
 
 .header {
     display: inherit;
@@ -239,6 +239,7 @@ body {
     border-radius: 15%;
     left: 25%;
     color: white;
+    box-shadow: 0 4px 8px 0 rgba(255,255,255, 0.2), 0 6px 20px 0 rgba(255,255,255, 0.19);
 }
 .modalTitle {
     display: inline-block;
@@ -259,10 +260,12 @@ body {
 }
 
 .contentDiv {
+    position: relative;
     height: 70%;
     width: 100%;
     background-color: rgba(0,0,0,.8);
     color: white;
+    box-shadow: 0 4px 8px 0 rgba(255,255,255, 0.2), 0 6px 20px 0 rgba(255,255,255, 0.19);
 }
 
 .buttons:focus {
@@ -366,11 +369,6 @@ body {
 }
 
 /* video modal */
-body {
-    background: #333;
-    padding: 70px 0;
-    font: 15px/20px Arial, sans-serif;
-}
 
 .container {
     margin: 0 auto;
@@ -455,7 +453,7 @@ body {
     margin: 0 1%;
     position: relative;
     top: 20%;
-    font-size: 1.2em;
+    font-size: 2.75vmin;
     box-shadow: 0 4px 8px 0 rgba(255,255,255, 0.2), 0 6px 20px 0 rgba(255,255,255, 0.19);
     background-color: rgba(0,255,0,0.3);
     height: 50%;
@@ -479,3 +477,33 @@ ul {
     margin: auto;
 }
 
+.text-overlay-div {
+    position: absolute;
+    height: 10%;
+    width: 100%;
+    bottom: 15%;
+    background-color: pink;
+    color: white;
+    background-color: rgba(0,0,0,.8);
+    text-align: center;
+    font-size: 3vmin;
+}
+
+.text-overlay-div > span {
+    position: relative;
+    text-align: center;
+}
+
+/*.arrow {*/
+    /*box-sizing: border-box;*/
+    /*border-radius: 100%;*/
+    /*background-color: rgba(0,0,0,.8);*/
+    /*height: 2em;*/
+    /*width: 2em;*/
+    /*position: relative;*/
+    /*left: 90%;*/
+    /*bottom: 55%;*/
+    /*text-align: center;*/
+    /*padding-top: 1%;*/
+    /*box-shadow: 0 4px 8px 0 rgba(255,255,255, 0.2), 0 6px 20px 0 rgba(255,255,255, 0.19);*/
+/*}*/

@@ -298,7 +298,7 @@ function getWikiText(planet) {
                 // console.log(data);
                 // var solarBodies = {
                 //     "sun":{ wikiLink: null, videos: [], nasaText: ''},
-                solarBodies[planet].wikiLink='https://en.wikipedia.org/wiki/'+planet
+                solarBodies[planet].wikiLink='https://en.wikipedia.org/wiki/'+planet;
                 removeLoader();
                 parseWikiText(data)
             },
@@ -320,8 +320,8 @@ function getWikiText(planet) {
                 // var solarBodies = {
                 //     "sun":{ wikiLink: null, videos: [], nasaText: ''},
 
-                solarBodies[planet].wikiLink='https://en.wikipedia.org/wiki/'+planet
-                removeLoader()
+                solarBodies[planet].wikiLink='https://en.wikipedia.org/wiki/'+planet;
+                removeLoader();
                 parseWikiText(data)
             },
 
@@ -398,7 +398,17 @@ function createCarousel(planetStr){
     var carouselContainer=$('<div>',{
         'class':'carouselContainer'
     });
-    $('.contentDiv').append(carouselContainer);//inside this selector pick where the carousel should go
+    var textOverlayDiv = $("<div>", {
+        'class': 'text-overlay-div'
+    }).append($('<span>', {
+        'text':'IMAGES FROM NASA (CLICK TO SEE MORE)'
+    }));
+    // var arrowDiv = $("<div>", {
+    //     'class': 'arrow',
+    //     'text': '>',
+    // });
+
+    $('.contentDiv').append(carouselContainer, textOverlayDiv);//inside this selector pick where the carousel should go
     for(var i=0; i<images.length; i++){
         var planetImageContainer= $('<div>',{
             "class" : "carouselImages"});
@@ -411,6 +421,7 @@ function createCarousel(planetStr){
             planetImageContainer.addClass('hide');
         }
     }
+    // $('.carouseContainer').append(overlayDiv);
     $('.carouselContainer > div').on('click', rotate);
 }
 
