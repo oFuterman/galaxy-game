@@ -26,8 +26,16 @@ function initializeApp(){
             event.stopPropagation();
         })
     }
+
+    $(".mainDisplayDiv").on('mousemove', function(){
+        console.log(event.offsetY);
+        $(".mainDisplayDiv").css("background-position-y", -1*event.offsetY + "px");
+        
+    });
+    
     // getDataFromYoutube();
     populatePictureArr();
+    animateBackground($(".mainDisplayDiv"), -.25);
 
 
 }
@@ -286,7 +294,7 @@ function getWikiText(planet) {
             // console.log(data);
             // var solarBodies = {
             //     "sun":{ wikiLink: null, videos: [], nasaText: ''},
-            solarBodies[planet].wikiLink='https://en.wikipedia.org/wiki/'+planet
+            //solarBodies[planet].wikiLink='https://en.wikipedia.org/wiki/'+planet
             parseWikiText(data)
         
             },
@@ -357,3 +365,28 @@ function populatePictureArr() {
         $.ajax(NasaImagesObject)
     }
 }
+
+function animateBackground(element, speed, maxTime=Infinity){
+    element = $(element); 
+    var xpercent=0;
+    var timer = null;
+    var intervalTime = 50; //50 milliseconds
+    var elapsedTime = 0;
+    maxTime *= 1000;
+    
+    function updateBackground(){
+      xpercent+=speed;    // x%  coordinate 
+      elapsedTime+=intervalTime;
+      if(elapsedTime>maxTime){
+        clearInterval(timer);
+      }
+      element.css('background-position-x', xpercent+'%');
+    }
+    timer = setInterval(updateBackground, intervalTime);
+ 
+  }
+
+
+  
+  
+

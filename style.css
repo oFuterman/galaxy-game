@@ -33,6 +33,7 @@ body {
     background-size: cover;
 }
 
+
 .footer {
     display: inherit;
     position: relative;
@@ -110,7 +111,7 @@ body {
     background-color: red;
     border-radius: 50%;
     cursor: pointer;
-    background-image: url("images/marsImage.pngg");
+    background-image: url("images/marsImage.png");
     background-position: center;
     background-size: cover;
 
@@ -283,4 +284,18 @@ body {
     /*background-color: #ffb3b3;*/
     top: 0;
 
+}
+
+html, body {
+    margin:0; overflow:hidden;
+}
+
+img {
+    width: 8vw;
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    margin: auto;
 }
