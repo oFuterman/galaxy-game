@@ -449,3 +449,47 @@ ul {
     margin: auto;
 }
 
+.jupiterDiv:hover{
+    height:27%;
+    width:18%;
+}
+
+.neptuneDiv:hover{
+    height:17%;
+    width:10%;
+}
+
+.uranusDiv:hover{
+    height:17%;
+    width:10%;
+}
+
+.marsDiv:hover{
+    height:15%;
+    width:9%;
+}
+
+.earthDiv:hover{
+    height:21%;
+    width:21%;
+}
+
+.mercuryDiv:hover{
+    height:15%;
+    width:12%;
+}
+
+.venusDiv:hover{
+    height:21%;
+    width:12%;
+}
+
+.sunDiv:hover{
+    height:75%;
+    width:40%;
+}
+
+.saturnDiv:hover{
+    height:18%;
+    width:19%;
+}

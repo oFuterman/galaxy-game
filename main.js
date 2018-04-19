@@ -30,9 +30,6 @@ function initializeSolarApp(){
         })
     }
     populatePictureArr();
-    $('.jupiterDiv').on('click',function(){
-        createCarousel(solarBodies['saturn'].nasaPicture);
-    });
 }
 
 function startModalClickHandler () {
@@ -248,6 +245,7 @@ function renderPlanetInfoInModal(planet){
 
     $("#bodyId").append(infoContainer, shadowDiv);
     $("#displayModal").show();
+    imagesButtonHandler(planet);
 }
 
 function infoButtonHandler(planet) {
