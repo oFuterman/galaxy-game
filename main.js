@@ -29,17 +29,19 @@ function initializeSolarApp(){
             event.stopPropagation();
         })
     }
+    moveBackgroundOnMouseMove()
 
+}
 
-    // $(".mainDisplayDiv").on('mousemove', function(){
-    //     console.log(event.offsetY);
-    //     $(".mainDisplayDiv").css("background-position-y", -1*event.offsetY + "px");
-    //
-    // });
+function moveBackgroundOnMouseMove() {
+    let galaxyBackground = $(".mainDisplayDiv");
+    galaxyBackground.on('mousemove', function(){
+        galaxyBackground.css("background-position-y", -1*event.offsetY + "px");
 
-    // getDataFromYoutube();
+    });
+
     populatePictureArr();
-    animateBackground($(".mainDisplayDiv"), -.05);
+    animateBackground(galaxyBackground, -.05);
 }
 
 function startModalClickHandler () {
@@ -50,9 +52,6 @@ function startModalClickHandler () {
 function hideStartModal () {
     console.log("hideModal");
     $("#startModal").hide();
-}
-function displayPlanetInfo(){
-
 }
 
 function getDataFromYoutube(planetInfo) {
@@ -83,13 +82,9 @@ function getDataFromYoutube(planetInfo) {
     $.ajax(youtubeAjaxObject);
 }
 
-// function renderVideoLinksOnDom(solarBodyVideoArray, planet) {
-//         $("."+planet+ "Div").click(function(){
-//             loadAndPlayVideo( solarBodyVideoArray[0], planet)
-//         }).addClass('clickable')
-// }
 
 function renderPhotosOnModal () {
+    let modal = $("#contentDiv");
     var photosToRender = $("<img>", {
         "id" : "imageCarousel",
         "src": "images/editsun.jpg"
@@ -101,7 +96,7 @@ function renderPhotosOnModal () {
 function renderVideosOnModal (currentSolarBodiesArr, planet) {
     var vidModal = $("<div>", {
         "class" : "videoModal",
-        "id" : "videoModal",
+        "id" : "videoModal"
 
     });
     var vidModalBody = $("<div>", {
@@ -205,14 +200,14 @@ function renderPlanetInfoInModal(planet){
         text: "Videos"
     });
 
-    var planetWikiLink = $("<a>",{
-        target:"_blank",
-        href:planetInfo.wikiLink,
-        text: planet + " wiki info"
-    });
+    // var planetWikiLink = $("<a>",{
+    //     target:"_blank",
+    //     href:planetInfo.wikiLink,
+    //     text: planet + " wiki info"
+    // });
     var contentDiv = $("<div>", {
         "class": "contentDiv",
-        "id": "contentDiv",
+        "id": "contentDiv"
     });
     var shadowDiv = $("<div>", {
         "class": "shadowDiv",
