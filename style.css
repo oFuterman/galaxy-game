@@ -482,20 +482,6 @@ ul {
     text-align: center;
 }
 
-/*.arrow {*/
-    /*box-sizing: border-box;*/
-    /*border-radius: 100%;*/
-    /*(0,0,0,.8);*/
-    /*height: 2em;*/
-    /*width: 2em;*/
-    /*position: relative;*/
-    /*left: 90%;*/
-    /*bottom: 55%;*/
-    /*text-align: center;*/
-    /*padding-top: 1%;*/
-    /*box-shadow: 0 4px 8px 0 rgba(255,255,255, 0.2), 0 6px 20px 0 rgba(255,255,255, 0.19);*/
-/*}*/
-
 .jupiterDiv:hover{
     height:32%;
     width:24%;
@@ -546,6 +532,7 @@ ul {
     position: relative;
     z-index: 1;
     margin: 1%;
+
     -webkit-animation-name: example; /* Safari 4.0 - 8.0 */
     -webkit-animation-duration: infinite; /* Safari 4.0 - 8.0 */
     animation-name: example;
@@ -600,4 +587,5 @@ font-size: 15px;
       transform: translateY(-15px);
     }
   }
+
 

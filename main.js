@@ -72,8 +72,8 @@ function getDataFromYoutube(planetInfo) {
         'success': function (result) {
             removeLoader();
             var currentSolarBodiesArr = Object.keys(result.data);
-            console.log(Object.keys(result.data));
-            solarBodies.planetInfo = currentSolarBodiesArr;
+            // console.log(Object.keys(result.data));
+            solarBodies.videos = currentSolarBodiesArr;
             renderVideosOnModal(currentSolarBodiesArr, planetInfo);
         },
         'error': function (error) {
@@ -335,7 +335,7 @@ function getWikiText(planet) {
             'success': function(data){
 
                 solarBodies[planet].wikiLink='https://en.wikipedia.org/wiki/'+planet
-                removeLoader()
+                removeLoader();
                
                 parseWikiText(data)
                 
@@ -386,7 +386,7 @@ function populatePictureArr() {
     }
 }
 
-function animateBackground(element, speed, maxTime=Infinity){
+function animateBackground(element, speed, maxTime = Infinity){
     element = $(element);
     var xpercent=0;
     var timer = null;
@@ -467,68 +467,17 @@ function removeLoader(){
 // DYNAMIC TEXT TO APPEAR
 function displayText(planetList){
     for (let planet in planetList){           // loops through the object at each specific key
-    $("."+planet+"Div").on("mouseover", function(){
+    $("."+planet+"Div").hover( function(){
         $(this).empty(); 
-        let planetName = this.className.slice(0, (this.className.length-3))
+        let planetName = this.className.slice(0, (this.className.length-3));
         var planetSpan = $('<span>').text(planetName);   
         var planetTextAppear= $('<div>').append(planetSpan);
         $(this).append(planetTextAppear);
-        $(this)
+        },
+        function() {
+            $(this).empty();
         });
-
     }
 }
 
-// video carousel
-// function videoCarousel() {
-//     console.log("video carousel function entered");
-//     let containerDiv = $("<div>", {
-//         'class': 'container'
-//     });
-//     let carouselDiv = $("<div>", {
-//         'class': 'carousel'
-//     });
-//     let video1 = $("<div>", {
-//         'class': 'item a'
-//     });
-//     let video2 = $("<div>", {
-//         'class': 'item b'
-//     });
-//     let video3 = $("<div>", {
-//         'class': 'item c'
-//     });
-//     let nextButton = $("<div>", {
-//         'class': 'next',
-//         'text': 'next'
-//     });
-//     let prevButton = $("<div>", {
-//         'class': 'prev',
-//         'text': 'prev'
-//     });
-//     let carousel = $(".carousel"),
-//         currdeg  = 0;
-//
-//     containerDiv.append(carouselDiv);
-//     carouselDiv.append(video1, video2, video3);
-//     containerDiv.append(nextButton, prevButton);
-//     $("body").append(containerDiv);
-//
-//     $(".next").on("click", { d: "n" }, rotate);
-//     $(".prev").on("click", { d: "p" }, rotate);
-//
-//     function rotate(e){
-//         if(e.data.d==="n"){
-//             currdeg = currdeg - 60;
-//         }
-//         if(e.data.d==="p"){
-//             currdeg = currdeg + 60;
-//         }
-//         carousel.css({
-//             "-webkit-transform": "rotateY("+currdeg+"deg)",
-//             "-moz-transform": "rotateY("+currdeg+"deg)",
-//             "-o-transform": "rotateY("+currdeg+"deg)",
-//             "transform": "rotateY("+currdeg+"deg)"
-//         });
-//     }
-// }
 
