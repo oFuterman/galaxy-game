@@ -256,7 +256,7 @@ function infoButtonHandler(planet) {
     $('#contentDiv').empty();
     addLoader();
     getWikiText(planet);
-    console.log(this)
+    console.log(this);
     $('#modalTitle').hover(function(){
         $(this).css({
             'color': 'purple',
@@ -279,7 +279,7 @@ function infoButtonHandler(planet) {
 
 function imagesButtonHandler(planet) {
     $('#contentDiv').empty();
-    addLoader()
+    addLoader();
     createCarousel(planet);
 }
 
