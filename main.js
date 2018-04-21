@@ -40,6 +40,7 @@ function initializeSolarApp(){
     // getDataFromYoutube();
     populatePictureArr();
     animateBackground($(".mainDisplayDiv"), -.05);
+    displayText(solarBodies);
 }
 
 function startModalClickHandler () {
@@ -465,6 +466,19 @@ function addLoader(){
 
 function removeLoader(){
     $('.contentDiv').empty();
+}
+
+// DYNAMIC TEXT TO APPEAR
+function displayText(planetList){
+    for (let planet in planetList){           // loops through the object at each specific key
+    $("."+planet+"Div").on("mouseover", function(){
+        $(this).empty(); 
+        let planetName = this.className.slice(0, (this.className.length-3))
+        var planetSpan = $('<span>').text(planetName);   
+        var planetTextAppear= $('<div>').append(planetSpan);
+        $(this).append(planetTextAppear);
+        });
+    }
 }
 
 // video carousel
