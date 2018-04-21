@@ -473,7 +473,9 @@ function displayText(planetList){
         var planetSpan = $('<span>').text(planetName);   
         var planetTextAppear= $('<div>').append(planetSpan);
         $(this).append(planetTextAppear);
+        $(this)
         });
+
     }
 }
 
