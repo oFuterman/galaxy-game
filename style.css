@@ -70,7 +70,7 @@ body{
     position: absolute;
     height: 72%;
     width: 37%;
-    top: 70%;
+    top: 90%;
     background-repeat: no-repeat;
     background-image: url("images/sunImage2.png");
     background-size: contain;
@@ -154,6 +154,7 @@ body{
 }
 
 .saturnDiv {
+    display: inherit;
     position: absolute;
     height: 22%;
     width: 27%;
@@ -162,7 +163,8 @@ body{
     cursor: pointer;
     background-image: url(images/saturnImage2.png);
     background-position: center;
-    background-size: cover;
+    background-size: contain;
+    background-repeat: no-repeat;
 }
 
 .uranusDiv {
@@ -530,5 +532,60 @@ ul {
     position: relative;
     z-index: 1;
     margin: 1%;
+
+    -webkit-animation-name: example; /* Safari 4.0 - 8.0 */
+    -webkit-animation-duration: infinite; /* Safari 4.0 - 8.0 */
+    animation-name: example;
+    animation-duration: infinite;
 }
+
+/* Safari 4.0 - 8.0 */
+@-webkit-keyframes example {
+    0%   {left:0px; top:0px;}
+    25%  {left:200px; top:0px;}
+    50%  {left:200px; top:200px;}
+    75%  {left:0px; top:200px;}
+    100% {left:0px; top:0px;}
+}
+
+/* Standard syntax */
+@keyframes example {
+    0%   {left:0px; top:0px;}
+    25%  {left:200px; top:0px;}
+    50%  {left:200px; top:200px;}
+    75%  {left:0px; top:200px;}
+    100% {left:0px; top:0px;}
+}
+
+span{
+color:hotpink;
+font-size: 15px;
+}
+
+.astronaut{
+    animation: bounce 1s infinite alternate;
+  -webkit-animation: bounce 1s infinite alternate;
+  position:relative;
+  top:50px;
+  left:20px;
+}
+
+
+@keyframes bounce {
+    from {
+      transform: translateY(0px);
+    }
+    to {
+      transform: translateY(-15px);
+    }
+  }
+  @-webkit-keyframes bounce {
+    from {
+      transform: translateY(0px);
+    }
+    to {
+      transform: translateY(-15px);
+    }
+  }
+
 
