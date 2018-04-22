@@ -297,6 +297,7 @@ body{
     height: 100%;
     width: 100%;
     top: 0;
+    z-index: 1;
 }
 
 
@@ -586,4 +587,56 @@ font-size: 15px;
     }
   }
 
+  .removeMoveButton {
+      height: 5vh;
+      width: 15vh;
+      border-radius: 100%;
+      background-color: rgba(255,255,255,0.5);
+      position: relative;
+  }
 
+.apologyDiv {
+    text-align: center;
+    height: 80%;
+    width: 100%;
+    top: 10%;
+    position: relative;
+}
+.apologyDiv > span {
+    display: block;
+}
+
+.apologyDiv > img {
+    height: 25vh;
+    width: 25vh;
+    position: relative;
+}
+
+.apologyDiv, .apologyDiv > img, .apologyDiv > span {
+    display: block;
+    float: none;
+}
+
+.astronautMessage {
+    height: 25vh;
+    width: 25vh;
+    position: relative;
+    background: #00aabb;
+    border-radius: .4em;
+    z-index: 2;
+}
+
+/*.astronautMessage:after {*/
+    /*content: '';*/
+    /*position: absolute;*/
+    /*left: 0;*/
+    /*top: 50%;*/
+    /*width: 0;*/
+    /*height: 0;*/
+    /*border: 20px solid transparent;*/
+    /*border-right-color: #00aabb;*/
+    /*border-left: 0;*/
+    /*border-bottom: 0;*/
+    /*margin-top: -10px;*/
+    /*margin-left: -20px;*/
+/*}*/
