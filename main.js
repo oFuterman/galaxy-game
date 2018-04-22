@@ -58,17 +58,42 @@ function moveBackgroundOnMouseMove() {
 function createRemoveMoveButton() {
     let button = $("<button>", {
         'class': 'removeMoveButton',
+        "id": "removeMoveButton",
         'text': 'Vertical Stop',
         'on': {
-            'click': toggleBackgroundMovement
+            'click': toggleBackgroundMovementOff
         }
     });
     $(".astronautAndButton").append(button)
 }
 
+function createStartMoveButton() {   let button = $("<button>", {
+    'class': 'startMoveButton',
+    "id": "startMoveButton",
+    'text': 'Vertical Start',
+    'on': {
+        'click': toggleBackgroundMovementOn
+    }
+});
+    $(".astronautAndButton").append(button)
 
-function toggleBackgroundMovement() {
-    $(".mainDisplayDiv").off()
+
+}
+
+function toggleBackgroundMovementOn () {
+    $("#startMoveButton").remove();
+    createRemoveMoveButton();
+    let galaxyBackground = $(".mainDisplayDiv");
+    galaxyBackground.on('mousemove', function() {
+        galaxyBackground.css("background-position-y", -1 * event.offsetY + "px");
+    });
+}
+
+
+function toggleBackgroundMovementOff() {
+    $("#removeMoveButton").remove();
+    createStartMoveButton();
+    $(".mainDisplayDiv").off();
 }
 
 function errorDisplay() {
@@ -149,8 +174,8 @@ function renderVideosOnModal (currentSolarBodiesArr, planet) {
     var iFrame = $("<iframe>", {
         "class": 'videoPlayer',
         "id" : "videoPlayer",
-        "width" : "560",
-        "height" : "315",
+        // "width" : "560",
+        // "height" : "315",
         "src" : "",
         "frameborder" : "0",
         "allow" : "autoplay; encrypted-media",
@@ -162,7 +187,7 @@ function renderVideosOnModal (currentSolarBodiesArr, planet) {
     var videoElements = [];
     for(let videoCodeIterator=0; videoCodeIterator<currentSolarBodiesArr.length; videoCodeIterator++){
         var videoLink = $("<li>", {
-            text: planet +' video '+(videoCodeIterator+1),
+            text: planet.toUpperCase() +' Video '+(videoCodeIterator+1),
             'class': 'videoList',
             on: {
                 click: function(){
@@ -297,10 +322,10 @@ function infoButtonHandler(planet) {
             'background-color': 'transparent',
             'text-decoration': 'underline'
         });
-        $($(this).children()[0]).attr("href", solarBodies[planet].wikiLink)
-        $($(this).children()[0]).attr('target',"_blank")
+        $($(this).children()[0]).attr("href", solarBodies[planet].wikiLink);
+        $($(this).children()[0]).attr('target',"_blank");
         console.log(this)
-    })
+    });
     $('#modalTitle').visited(function(){
         $(this).css({
             'color': 'white',
@@ -450,7 +475,7 @@ function createCarousel(planetStr){
     var textOverlayDiv = $("<div>", {
         'class': 'text-overlay-div'
     }).append($('<span>', {
-        'text':'IMAGES FROM NASA (CLICK TO SEE MORE)'
+        'text':'IMAGES FROM NASA (CLICK IMAGES TO SEE MORE)'
     }));
 
     $('.contentDiv').append(carouselContainer/*, textOverlayDiv*/);//inside this selector pick where the carousel should go
