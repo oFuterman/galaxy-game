@@ -243,6 +243,7 @@ body{
     (0,0,0,.8);
     color: white;
     box-shadow: 0 4px 8px 0 rgba(255,255,255, 0.2), 0 6px 20px 0 rgba(255,255,255, 0.19);
+    user-select:none;
 }
 
 .buttons:focus {
@@ -265,6 +266,7 @@ body{
     top: 25%;
     border-radius: 50%;
     cursor: pointer;
+    user-select:none;
 }
 
 .closeButton {
@@ -448,6 +450,7 @@ img {
     width: 25%;
     cursor: pointer;
     vertical-align: middle;
+    user-select:none;
 }
 
 ul {
@@ -478,8 +481,8 @@ ul {
 }
 
 .text-overlay-div > span {
-    position: relative;
-    text-align: center;
+    display:block;
+    user-select:none;
 }
 
 .jupiterDiv:hover{
@@ -532,11 +535,6 @@ ul {
     position: relative;
     z-index: 1;
     margin: 1%;
-
-    -webkit-animation-name: example; /* Safari 4.0 - 8.0 */
-    -webkit-animation-duration: infinite; /* Safari 4.0 - 8.0 */
-    animation-name: example;
-    animation-duration: infinite;
 }
 
 /* Safari 4.0 - 8.0 */
