@@ -33,12 +33,12 @@ function initializeSolarApp(){
     moveBackgroundOnMouseMove();
     shadowModal();
     createRemoveMoveButton();
-    $(".astronaut").hover(function() {
+    $("#astronaut").hover(function() {
         console.log('funct entered');
-        $(".astronaut").append($('<div>').addClass('astronautMessage').text('Brought to you by Bora, Hahn, Omer, Brett, and Alia!'))
+        $("#astronautAndButton").append($('<div>').attr("id","astronautMessage").addClass('astronautMessage').text('Brought to you by Bora, Hahn, Omer, Brett, and Alia!'))
         },
         function() {
-            $(".astronaut").empty()
+            $("#astronautMessage").remove();
     })
 }
 
@@ -63,7 +63,7 @@ function createRemoveMoveButton() {
             'click': toggleBackgroundMovement
         }
     });
-    $(".mainDisplayDiv").append(button)
+    $(".astronautAndButton").append(button)
 }
 
 
@@ -500,8 +500,10 @@ function displayText(planetList){
     for (let planet in planetList){           // loops through the object at each specific key
     $("."+planet+"Div").hover( function(){
         let planetName = this.className.slice(0, (this.className.length-3));
-        var planetSpan = $('<span>').text(planetName);   
-        var planetTextAppear= $('<div>').append(planetSpan);
+        var planetSpan = $('<span>').text(planetName.toUpperCase());
+        var planetTextAppear= $('<div>', {
+            "class" : "planetText"
+        }).append(planetSpan);
         $(this).append(planetTextAppear);
         },
         function() {
