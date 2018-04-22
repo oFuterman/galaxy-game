@@ -52,7 +52,7 @@ function startModalClickHandler () {
 }
 
 function hideStartModal () {
-    console.log("hideModal");
+    // console.log("hideModal");
     $("#startModal").hide();
 }
 
@@ -85,15 +85,15 @@ function getDataFromYoutube(planetInfo) {
 }
 
 
-function renderPhotosOnModal () {
-    let modal = $("#contentDiv");
-    var photosToRender = $("<img>", {
-        "id" : "imageCarousel",
-        "src": "images/editsun.jpg"
-    });
-    $("#contentDiv").append(photosToRender);
-    console.log("button works")
-}
+// function renderPhotosOnModal () {
+//     let modal = $("#contentDiv");
+//     var photosToRender = $("<img>", {
+//         "id" : "imageCarousel",
+//         "src": "images/editsun.jpg"
+//     });
+//     $("#contentDiv").append(photosToRender);
+//     console.log("button works")
+// }
 
 function renderVideosOnModal (currentSolarBodiesArr, planet) {
     var vidModal = $("<div>", {
@@ -138,7 +138,7 @@ function renderVideosOnModal (currentSolarBodiesArr, planet) {
     $("#contentDiv").append(videoList);
 }
 
-function loadAndPlayVideo(link, planet){
+function loadAndPlayVideo(link){
     $("#videoModal").show();
     $("#videoPlayer").attr('src','https://www.youtube.com/embed/' + link )
 }
@@ -202,11 +202,11 @@ function renderPlanetInfoInModal(planet){
         text: "Videos"
     });
 
-    // var planetWikiLink = $("<a>",{
-    //     target:"_blank",
-    //     href:planetInfo.wikiLink,
-    //     text: planet + " wiki info"
-    // });
+    var planetWikiLink = $("<a>",{
+        target:"_blank",
+        href:planetInfo.wikiLink,
+        text: planet + " wiki info"
+    });
     var contentDiv = $("<div>", {
         "class": "contentDiv",
         "id": "contentDiv"
@@ -306,8 +306,6 @@ function loadAndPlayVideo(link){
     $("#videoModal").show();
     $("#videoPlayer").attr('src','https://www.youtube.com/embed/' + link )
 }
-
-//omers doing his random things down here---------------------------------
 
 function getWikiText(planet) {
     if( planet ==='mercury')  {
@@ -420,12 +418,9 @@ function createCarousel(planetStr){
     }).append($('<span>', {
         'text':'IMAGES FROM NASA (CLICK TO SEE MORE)'
     }));
-    // var arrowDiv = $("<div>", {
-    //     'class': 'arrow',
-    //     'text': '>',
-    // });
 
-    $('.contentDiv').append(carouselContainer, textOverlayDiv);//inside this selector pick where the carousel should go
+    $('.contentDiv').append(carouselContainer/*, textOverlayDiv*/);//inside this selector pick where the carousel should go
+
     for(var i=0; i<images.length; i++){
         var planetImageContainer= $('<div>',{
             "class" : "carouselImages"});
@@ -438,7 +433,9 @@ function createCarousel(planetStr){
             planetImageContainer.addClass('hide');
         }
     }
-    // $('.carouseContainer').append(overlayDiv);
+    for (i = 0; i < $('.carouselContainer > div').length; i++) {
+        $('.carouselContainer > div').append(textOverlayDiv);
+    }
     $('.carouselContainer > div').on('click', rotate);
 }
 
@@ -468,7 +465,6 @@ function removeLoader(){
 function displayText(planetList){
     for (let planet in planetList){           // loops through the object at each specific key
     $("."+planet+"Div").hover( function(){
-        $(this).empty(); 
         let planetName = this.className.slice(0, (this.className.length-3));
         var planetSpan = $('<span>').text(planetName);   
         var planetTextAppear= $('<div>').append(planetSpan);
