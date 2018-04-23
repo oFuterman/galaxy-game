@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/../Bigger_Projects_After_4.6.18/SGT/.idea/SGT.iml" filepath="$PROJECT_DIR$/../Bigger_Projects_After_4.6.18/SGT/.idea/SGT.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../.idea/LFZ.iml" filepath="$PROJECT_DIR$/../.idea/LFZ.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/c318_hackathon2.iml" filepath="$PROJECT_DIR$/.idea/c318_hackathon2.iml" />
     </modules>
   </component>

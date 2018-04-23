@@ -35,7 +35,7 @@ function initializeSolarApp(){
     createRemoveMoveButton();
     $("#astronaut").hover(function() {
         console.log('funct entered');
-        $("#astronautAndButton").append($('<div>').attr("id","astronautMessage").addClass('astronautMessage').text('Brought to you by Bora, Hahn, Omer, Brett, and Alia!'))
+        $("#astronautAndButton").append($('<div>').attr("id","astronautMessage").addClass('astronautMessage').text('Brought to you by Bora, Hanh, Omer, Brett, and Alia!'))
         },
         function() {
             $("#astronautMessage").remove();
