@@ -530,7 +530,9 @@ function displayText(planetList){
             "class" : "planetText"
         }).append(planetSpan);
         $(this).append(planetTextAppear);
+
         },
+
         function() {
             $(this).empty();
         });
