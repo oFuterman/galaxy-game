@@ -21,7 +21,7 @@ body{
     top: 15%;
     text-align: center;
     border-radius: 10%;
-    (157, 157, 157, 0.8);
+    /* (157, 157, 157, 0.8); */
     z-index: 1;
     color: white;
     box-shadow:
@@ -213,7 +213,7 @@ body{
     position: absolute;
     height: 70%;
     width: 50%;
-    (157, 157, 157, 0.51);
+    /* (157, 157, 157, 0.51); */
     z-index: 10;
     bottom: 15%;
     border-radius: 15%;
@@ -247,7 +247,7 @@ body{
     background-color: rgba(0,0,0,.9);
     height: 70%;
     width: 100%;
-    (0,0,0,.8);
+    /* (0,0,0,.8); */
     color: white;
     box-shadow: 0 4px 8px 0 rgba(255,255,255, 0.2), 0 6px 20px 0 rgba(255,255,255, 0.19);
     user-select:none;
@@ -453,7 +453,7 @@ img {
     top: 20%;
     font-size: 2.75vmin;
     box-shadow: 0 4px 8px 0 rgba(255,255,255, 0.2), 0 6px 20px 0 rgba(255,255,255, 0.19);
-    (0,255,0,0.3);
+    /* (0,255,0,0.3); */
     height: 50%;
     width: 25%;
     cursor: pointer;
@@ -485,7 +485,7 @@ ul {
     bottom: 15%;
     background-color: rgba(0,0,0,0.5);
     color: white;
-    (0,0,0,.8);
+    /* (0,0,0,.8); */
     text-align: center;
     font-size: 3vmin;
 }
@@ -496,50 +496,40 @@ ul {
 }
 
 .jupiterDiv:hover{
-    height:32%;
-    width:24%;
+    transform: scale(1.1); 
 }
 
 .neptuneDiv:hover{
-    height:17%;
-    width:10%;
+    transform: scale(1.2); 
 }
 
 .uranusDiv:hover{
-    height:17%;
-    width:10%;
+    transform: scale(1.2); 
 }
 
 .marsDiv:hover{
-    height:15%;
-    width:9%;
+    transform: scale(1.2); 
 }
 
 .earthDiv:hover{
-    height:26%;
-    width:11%;
+    transform: scale(1.2); 
 }
 
 .mercuryDiv:hover{
-    height:15%;
-    width:12%;
+    transform: scale(1.2); 
 }
 
 .venusDiv:hover{
-    height:21%;
-    width:12%;
+    transform: scale(1.2); 
 }
 
 .sunDiv:hover{
-    height:75%;
-    width:40%;
+    transform: scale(1.1); 
 }
 
 .saturnDiv:hover{
-    height:24%;
-    width:29%;
+    transform: scale(1.2); 
 }
-
 
 
 /* Safari 4.0 - 8.0 */
@@ -561,9 +551,10 @@ ul {
 }
 
 span{
-    color:hotpink;
+    color: rgb(216, 7, 7);
     font-size: 2.75vmin;
-    }
+}
+
 .astronaut {
     display: inline-block;
     position: relative;
@@ -583,13 +574,14 @@ span{
     display: inline-block;
     left: 3vmin;
     top: 5vmin;
-    height: 5vmin;
-    width: 10vmin;
-    font-size: 1.5vmin;
+    height: 35px;
+    width: 70px;
+    font-size: 10px;
     border-radius: 100%;
     background-color: rgba(255, 255, 255, 0.31);
     position: relative;
     cursor: pointer;
+    color:cyan;
 }
 
 .startMoveButton {
@@ -662,7 +654,7 @@ span{
     position: fixed;
     height: 10vmin;
     width: 20vmin;
-    top: 35vmin;
+    top: 25vmin;
     left: 5vmin;
     font-size: 2vmin;
     background: rgba(185, 183, 187, 0.51);

@@ -45,7 +45,7 @@ function initializeSolarApp(){
 function moveBackgroundOnMouseMove() {
     let galaxyBackground = $(".mainDisplayDiv");
     galaxyBackground.on('mousemove', function(){
-        galaxyBackground.css("background-position-y", -1*event.offsetY + "px");
+        galaxyBackground.css("background-position-y", -1*event.screenY + "px");
 
     });
 
